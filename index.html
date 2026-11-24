@@ -3,25 +3,31 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
-<meta name="color-scheme" content="dark">
-<meta name="theme-color" content="#0d0d0d">
+<meta name="theme-color" content="#0a0a0a" id="meta-theme">
 <meta name="robots" content="index,follow" id="meta-robots">
 <meta name="description" content="Ompha Visuals — photography portfolio and private client galleries.">
+<meta property="og:type" content="website">
+<meta property="og:site_name" content="Ompha Visuals">
+<meta property="og:title" content="Ompha Visuals — Photography">
+<meta property="og:description" content="Portrait and sports photography with private client galleries.">
+<meta property="og:image" content="https://res.cloudinary.com/pbjrmzzv/image/upload/c_pad,w_1200,h_630,b_rgb:f6f5f2,f_png/ov-logo">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:image" content="https://res.cloudinary.com/pbjrmzzv/image/upload/c_pad,w_1200,h_630,b_rgb:f6f5f2,f_png/ov-logo">
 <title>Ompha Visuals — Photography</title>
 
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@400;500;600&family=Manrope:wght@300;400;500;600&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600&family=Instrument+Serif:ital@0;1&display=swap" rel="stylesheet">
 
 <script src="https://cdn.tailwindcss.com"></script>
 <script>
   tailwind.config = {
     theme: {
       extend: {
-        colors: { ink: '#0d0d0d', card: '#1a1a1a', mute: '#a0a0a0' },
+        colors: { ink: '#0a0a0a', card: '#141414', mute: '#8d8d8d' },
         fontFamily: {
-          display: ['"Cormorant Garamond"', 'Georgia', 'serif'],
-          sans: ['Manrope', 'system-ui', '-apple-system', 'Segoe UI', 'sans-serif']
+          display: ['"Instrument Serif"', 'Georgia', 'serif'],
+          sans: ['Inter', 'system-ui', '-apple-system', 'Segoe UI', 'sans-serif']
         }
       }
     }
@@ -29,178 +35,204 @@
 </script>
 
 <style>
-  :root { --ink:#0d0d0d; --card:#1a1a1a; --mute:#a0a0a0; }
-  html { background: var(--ink); color:#fff; color-scheme: dark; -webkit-text-size-adjust:100%; scroll-behavior:smooth; }
-  body { background: var(--ink); min-height:100dvh; overflow-x:hidden; -webkit-tap-highlight-color:transparent; font-family: Manrope, system-ui, sans-serif; }
+  :root { --bg:#f6f5f2; --fg:#111; --mut:#6f6e69; --line:rgba(17,17,17,.12); --acc:#8f7a58; --ease:cubic-bezier(.22,1,.36,1); }
+  html { background:#0a0a0a; color:#fff; color-scheme:dark; -webkit-text-size-adjust:100%; scroll-behavior:smooth; }
+  body { background:#0a0a0a; min-height:100dvh; overflow-x:hidden; -webkit-tap-highlight-color:transparent; font-family:Inter, system-ui, sans-serif; -webkit-font-smoothing:antialiased; }
+  html.lt, html.lt body { background:var(--bg); color:var(--fg); color-scheme:light; }
   html.lock, html.lock body { overflow:hidden; }
   .is-hidden { display:none !important; }
+  .font-display, .font-display em { font-family:"Instrument Serif", Georgia, serif; font-weight:400; }
+  em { font-style:italic; }
+  .safe-top { padding-top:env(safe-area-inset-top, 0px); }
+  .safe-bottom { padding-bottom:calc(.75rem + env(safe-area-inset-bottom, 0px)); }
+  .toast-pos { bottom:calc(5.5rem + env(safe-area-inset-bottom, 0px)); }
+  @media (min-width:768px){ .toast-pos { bottom:2rem; } }
+  .wrap { width:100%; max-width:1240px; margin:0 auto; padding-left:20px; padding-right:20px; }
+  @media (min-width:640px){ .wrap { padding-left:32px; padding-right:32px; } }
 
-  /* Layout helpers */
-  .safe-top { padding-top: env(safe-area-inset-top, 0px); }
-  .safe-bottom { padding-bottom: calc(0.75rem + env(safe-area-inset-bottom, 0px)); }
-  .toast-pos { bottom: calc(5.5rem + env(safe-area-inset-bottom, 0px)); }
-  @media (min-width:768px){ .toast-pos { bottom: 2rem; } }
-
-  /* Glassmorphism buttons — 44px minimum touch target */
   .tap { min-width:44px; min-height:44px; }
-  .glass {
-    background: rgba(255,255,255,.08);
-    border: 1px solid rgba(255,255,255,.16);
-    -webkit-backdrop-filter: blur(14px) saturate(140%);
-    backdrop-filter: blur(14px) saturate(140%);
-    color:#fff; cursor:pointer;
-    transition: background .2s, border-color .2s, transform .15s;
-  }
-  .glass:hover { background: rgba(255,255,255,.14); border-color: rgba(255,255,255,.28); }
-  .glass:active { transform: scale(.96); background: rgba(255,255,255,.2); }
+  .glass { background:rgba(255,255,255,.07); border:1px solid rgba(255,255,255,.14); -webkit-backdrop-filter:blur(16px) saturate(140%); backdrop-filter:blur(16px) saturate(140%); color:#fff; cursor:pointer; transition:background .3s, border-color .3s, transform .4s var(--ease); }
+  .glass:hover { background:rgba(255,255,255,.13); border-color:rgba(255,255,255,.26); }
+  .glass:active { transform:scale(.96); background:rgba(255,255,255,.2); }
   .glass:disabled { opacity:.45; cursor:not-allowed; }
-  .glass-strong { background: rgba(255,255,255,.16); border-color: rgba(255,255,255,.3); }
-  .seg-on { background: rgba(255,255,255,.2); border-color: rgba(255,255,255,.4); }
-  a:focus-visible, button:focus-visible, input:focus-visible { outline:2px solid rgba(255,255,255,.75); outline-offset:2px; }
+  .glass-strong { background:rgba(255,255,255,.15); border-color:rgba(255,255,255,.3); }
+  .seg-on { background:rgba(255,255,255,.22) !important; border-color:rgba(255,255,255,.5) !important; }
+  a:focus-visible, button:focus-visible, input:focus-visible, select:focus-visible, textarea:focus-visible { outline:2px solid rgba(255,255,255,.75); outline-offset:2px; }
+  html.lt a:focus-visible, html.lt button:focus-visible, html.lt input:focus-visible, html.lt select:focus-visible, html.lt textarea:focus-visible { outline-color:var(--fg); }
 
-  /* Form bits */
-  .field {
-    width:100%; min-height:48px; padding:0 14px; color:#fff; font-size:16px; /* 16px stops iOS zoom */
-    background: rgba(255,255,255,.04); border:1px solid rgba(255,255,255,.14); border-radius:12px;
-  }
+  .field { width:100%; min-height:48px; padding:0 14px; color:#fff; font-size:16px; background:rgba(255,255,255,.04); border:1px solid rgba(255,255,255,.14); border-radius:12px; }
   .field::placeholder { color:#6b6b6b; }
   .field:disabled { opacity:.5; }
-  input[type="date"].field { color-scheme: dark; }
-  .label { display:block; font-size:.8rem; color: var(--mute); margin-bottom:6px; }
-  .eyebrow { font-size:.7rem; letter-spacing:.25em; text-transform:uppercase; color: var(--mute); }
-  .panel { background: var(--card); border:1px solid rgba(255,255,255,.08); border-radius:16px; padding:20px; }
-  .step-n { flex:none; width:26px; height:26px; border-radius:999px; border:1px solid rgba(255,255,255,.22);
-            display:flex; align-items:center; justify-content:center; font-size:.75rem; color:#fff; }
+  input[type="date"].field, input[type="date"].lf { color-scheme:dark; }
+  .label { display:block; font-size:.8rem; color:#8d8d8d; margin-bottom:6px; }
+  .eyebrow { font-size:.68rem; letter-spacing:.26em; text-transform:uppercase; color:var(--mut); }
+  #view-gallery, #view-admin, #lightbox, #toast, #crop-modal { --mut:#8d8d8d; }
+  .panel { background:#141414; border:1px solid rgba(255,255,255,.08); border-radius:18px; padding:20px; }
+  .posbox { width:44px; height:44px; flex:none; text-align:center; font:600 16px Inter, system-ui, sans-serif; color:#fff; background:rgba(255,255,255,.08); border:1px solid rgba(255,255,255,.22); border-radius:12px; }
+  .flash { animation:flash 1.4s var(--ease); }
+  @keyframes flash { 0%,60% { background:rgba(255,255,255,.14); } }
 
-  /* Masonry */
-  .masonry { column-count:2; column-gap:10px; }
-  .masonry > * { break-inside:avoid; margin-bottom:10px; }
-  @media (min-width:768px){ .masonry { column-count:3; column-gap:14px; } .masonry > * { margin-bottom:14px; } }
-  @media (min-width:1280px){ .masonry { column-count:4; } }
+  .dk { --bg:#0e0e0e; --fg:#f6f5f2; --mut:#9a9890; --line:rgba(246,245,242,.16); background:var(--bg); color:var(--fg); }
 
-  /* Photos */
-  .ph-img { opacity:0; transition: opacity .6s ease, transform .6s ease; }
+  .pill { display:inline-flex; align-items:center; justify-content:center; gap:.5rem; min-height:48px; padding:0 1.6rem; border-radius:999px; font:500 .95rem Inter, system-ui, sans-serif; cursor:pointer; border:1px solid transparent; transition:transform .5s var(--ease), background .3s, color .3s, box-shadow .4s; }
+  .pill:hover { transform:translateY(-2px); }
+  .pill:active { transform:scale(.97); }
+  .pill-sm { min-height:44px; padding:0 1.25rem; font-size:.9rem; }
+  .pill-d { background:var(--fg); color:var(--bg); }
+  .pill-d:hover { box-shadow:0 10px 30px -12px rgba(0,0,0,.5); }
+  .pill-o { border-color:var(--line); color:var(--fg); background:transparent; }
+  .pill-o:hover { background:var(--fg); color:var(--bg); }
+  .pill-w { background:#fff; color:#0a0a0a; }
+  .pill-w:hover { box-shadow:0 12px 40px -12px rgba(255,255,255,.4); }
+  .t-mut { color:var(--mut); }
+
+  .lf { width:100%; min-height:50px; padding:0 14px; font-size:16px; background:rgba(127,127,127,.07); border:1px solid var(--line); border-radius:12px; color:var(--fg); transition:border-color .3s, background .3s; }
+  .lf:focus { border-color:var(--fg); background:transparent; }
+  textarea.lf { padding:12px 14px; min-height:110px; }
+  .lf::placeholder { color:var(--mut); opacity:.7; }
+  .lbl { display:block; font-size:.66rem; letter-spacing:.2em; text-transform:uppercase; color:var(--mut); margin-bottom:6px; }
+  .chip { min-height:40px; padding:0 1.1rem; border-radius:999px; font-size:.82rem; border:1px solid var(--line); color:var(--mut); background:transparent; cursor:pointer; transition:all .4s var(--ease); }
+  .chip:hover { color:var(--fg); }
+  .chip.on { background:var(--fg); color:var(--bg); border-color:var(--fg); }
+  .navlink { font-size:.85rem; color:var(--mut); transition:color .3s; }
+  .navlink:hover { color:var(--fg); }
+  .p-head { position:sticky; top:0; z-index:40; border-bottom:1px solid transparent; transition:background .5s var(--ease), border-color .5s, backdrop-filter .5s; }
+  .p-head.scrolled { background:rgba(246,245,242,.82); -webkit-backdrop-filter:blur(14px); backdrop-filter:blur(14px); border-color:var(--line); }
+  .pkg { display:flex; flex-direction:column; padding:28px; border-radius:22px; border:1px solid var(--line); background:#fffefb; transition:transform .7s var(--ease), box-shadow .7s var(--ease); }
+  .pkg:hover { transform:translateY(-6px); box-shadow:0 30px 60px -30px rgba(0,0,0,.3); }
+  .pkg.f { background:#0e0e0e; color:#f6f5f2; border-color:#0e0e0e; }
+  .step { padding:24px 20px; background:var(--bg); }
+  .feat { border:1px solid var(--line); border-radius:14px; padding:16px; }
+  .hero-h { font-size:clamp(3.2rem, 11vw, 6.6rem); line-height:.95; letter-spacing:-.03em; }
+  .hero-h em { color:var(--acc); }
+  .ln { display:block; overflow:hidden; padding-bottom:.08em; }
+  .ln > span { display:inline-block; transform:translateY(110%); animation:lnUp 1.2s var(--ease) forwards; animation-delay:calc(var(--d, 0s) + 1.05s); }
+  @keyframes lnUp { to { transform:none; } }
+  .marq { display:flex; width:max-content; animation:marq 36s linear infinite; }
+  @keyframes marq { to { transform:translateX(-50%); } }
+
+  .rv { opacity:0; transform:translateY(32px); filter:blur(6px); transition:opacity 1.1s var(--ease), transform 1.1s var(--ease), filter 1.1s var(--ease); transition-delay:var(--d, 0s); }
+  .rv.in { opacity:1; transform:none; filter:none; }
+  .clip { clip-path:inset(0 0 100% 0); transition:clip-path 1.5s var(--ease); transition-delay:var(--d, 0s); }
+  .clip.in { clip-path:inset(0); }
+  .clip img { transform:scale(1.22); transition:transform 2.2s var(--ease); transition-delay:var(--d, 0s); }
+  .clip.in img { transform:none; }
+
+  #curtain { position:fixed; inset:0; z-index:100; display:flex; align-items:center; justify-content:center; background:var(--bg); color:var(--fg); font-size:clamp(2rem, 8vw, 3.5rem); transition:transform 1.1s var(--ease) .1s; }
+  #curtain span { animation:fadeUp 1s var(--ease) both; }
+  #curtain.out { transform:translateY(-100%); }
+  body.leaving #view-portfolio { opacity:0; transition:opacity .45s ease; }
+
+  #lightbox:not(.is-hidden), #zip-modal:not(.is-hidden), #pin-overlay:not(.is-hidden), #crop-modal:not(.is-hidden) { animation:fadeIn .4s var(--ease); }
+  #view-portfolio:not(.is-hidden), #view-admin:not(.is-hidden), #g-main:not(.is-hidden) { animation:fadeIn 1s var(--ease); }
+  #zip-sheet { animation:sheetUp .7s var(--ease); }
+  @keyframes fadeIn { from { opacity:0; } }
+  @keyframes fadeUp { from { opacity:0; transform:translateY(24px); } }
+  @keyframes sheetUp { from { transform:translateY(40px); opacity:0; } }
+  #lb-img { transform:scale(.97); }
+  #lb-img.loaded { transform:none; }
+  .ph-img { opacity:0; transition:opacity .8s ease, transform .9s var(--ease); }
   .ph-img.loaded { opacity:1; }
-  .card:hover .ph-img { transform: scale(1.03); }
-  .card.broken::after { content:"Photo unavailable"; position:absolute; inset:0; display:flex; align-items:center; justify-content:center; font-size:.75rem; color: var(--mute); }
-  .skel { background: linear-gradient(110deg, #1a1a1a 30%, #242424 50%, #1a1a1a 70%); background-size:200% 100%; animation: shimmer 1.4s linear infinite; }
+  .card:hover .ph-img.loaded { transform:scale(1.03); }
+  .card.broken::after { content:"Photo unavailable"; position:absolute; inset:0; display:flex; align-items:center; justify-content:center; font-size:.75rem; color:var(--mut); }
+  .skel { background:linear-gradient(110deg,#141414 30%,#1f1f1f 50%,#141414 70%); background-size:200% 100%; animation:shimmer 1.4s linear infinite; }
+  html.lt .skel { background:linear-gradient(110deg,#ebe8e1 30%,#f4f2ec 50%,#ebe8e1 70%); background-size:200% 100%; }
   @keyframes shimmer { to { background-position:-200% 0; } }
 
-  /* Download overlay: revealed on hover (desktop), always visible on touch */
-  .dl-wrap { opacity:0; transition: opacity .25s; }
+  .mag { --g:10px; --tile:#141414; display:grid; grid-template-columns:repeat(2,1fr); grid-auto-rows:4px; grid-auto-flow:row dense; column-gap:var(--g); }
+  .mag.lts { --tile:#e9e6df; }
+  .mag > .card { background:var(--tile); border-radius:clamp(14px,3vw,22px); margin-bottom:var(--g); }
+  @media (min-width:768px){ .mag { --g:14px; grid-template-columns:repeat(4,1fr); } }
+  @media (min-width:1100px){ .mag { grid-template-columns:repeat(6,1fr); } }
+  .dl-wrap { opacity:0; transition:opacity .3s; }
   .card:hover .dl-wrap, .card:focus-within .dl-wrap { opacity:1; }
   @media (hover:none) { .dl-wrap { opacity:1; } .dl-grad { display:none; } }
-
   @keyframes shake { 0%,100%{transform:translateX(0)} 20%{transform:translateX(-8px)} 40%{transform:translateX(8px)} 60%{transform:translateX(-5px)} 80%{transform:translateX(5px)} }
-  .shake { animation: shake .4s; }
+  .shake { animation:shake .4s; }
+  #sec-state .text-mute { color:inherit; opacity:.7; }
+
+  #g-welcome { background:#000; transition:transform 1.3s var(--ease); }
+  #g-welcome:not(.is-hidden) { animation:fadeIn .8s var(--ease); }
+  #g-welcome.leave { transform:translateY(-100%); }
+  .wl-bg { position:absolute; inset:0; overflow:hidden; }
+  .wl-bg img { width:100%; height:100%; object-fit:cover; opacity:0; transform:scale(1.18); transition:opacity 1.6s var(--ease), transform 3s var(--ease); }
+  .wl-bg img.loaded { opacity:1; transform:scale(1); }
+  .wl-shade { position:absolute; inset:0; background:linear-gradient(to top, rgba(0,0,0,.82), rgba(0,0,0,.12) 55%, rgba(0,0,0,.4)); }
+  .wl-content { position:absolute; left:0; right:0; bottom:0; padding:0 24px calc(48px + env(safe-area-inset-bottom, 0px)); max-width:900px; }
+  .wl-content > * { opacity:0; animation:fadeUp 1.2s var(--ease) forwards; }
+  .wl-content > :nth-child(1) { animation-delay:.5s; } .wl-content > :nth-child(2) { animation-delay:.7s; } .wl-content > :nth-child(3) { animation-delay:.9s; } .wl-content > :nth-child(4) { animation-delay:1.1s; }
+
+  .cr-box { position:absolute; border:1.5px solid #fff; cursor:move; touch-action:none; background:linear-gradient(rgba(255,255,255,.4),rgba(255,255,255,.4)) 33.33% 0/1px 100% no-repeat, linear-gradient(rgba(255,255,255,.4),rgba(255,255,255,.4)) 66.66% 0/1px 100% no-repeat, linear-gradient(rgba(255,255,255,.4),rgba(255,255,255,.4)) 0 33.33%/100% 1px no-repeat, linear-gradient(rgba(255,255,255,.4),rgba(255,255,255,.4)) 0 66.66%/100% 1px no-repeat; }
+  .cr-box .hd { position:absolute; width:44px; height:44px; display:block; touch-action:none; }
+  .cr-box .hd::after { content:""; position:absolute; }
+  .hd[data-h="nw"] { left:-22px; top:-22px; } .hd[data-h="ne"] { right:-22px; top:-22px; } .hd[data-h="sw"] { left:-22px; bottom:-22px; } .hd[data-h="se"] { right:-22px; bottom:-22px; }
+  .hd[data-h="n"] { left:calc(50% - 22px); top:-22px; } .hd[data-h="s"] { left:calc(50% - 22px); bottom:-22px; } .hd[data-h="w"] { left:-22px; top:calc(50% - 22px); } .hd[data-h="e"] { right:-22px; top:calc(50% - 22px); }
+  .hd[data-h="nw"]::after { left:20px; top:20px; width:20px; height:20px; border-left:3px solid #fff; border-top:3px solid #fff; }
+  .hd[data-h="ne"]::after { right:20px; top:20px; width:20px; height:20px; border-right:3px solid #fff; border-top:3px solid #fff; }
+  .hd[data-h="sw"]::after { left:20px; bottom:20px; width:20px; height:20px; border-left:3px solid #fff; border-bottom:3px solid #fff; }
+  .hd[data-h="se"]::after { right:20px; bottom:20px; width:20px; height:20px; border-right:3px solid #fff; border-bottom:3px solid #fff; }
+  .hd[data-h="n"]::after, .hd[data-h="s"]::after { left:6px; width:32px; height:4px; background:#fff; border-radius:2px; top:20px; }
+  .hd[data-h="w"]::after, .hd[data-h="e"]::after { top:6px; height:32px; width:4px; background:#fff; border-radius:2px; left:20px; }
 
   ::-webkit-scrollbar { width:10px; height:10px; }
   ::-webkit-scrollbar-thumb { background:#2a2a2a; border-radius:10px; }
-  ::-webkit-scrollbar-track { background: var(--ink); }
-
+  ::-webkit-scrollbar-track { background:#0a0a0a; }
   @media (prefers-reduced-motion: reduce) {
-    *, *::before, *::after { animation-duration:.01ms !important; transition-duration:.01ms !important; scroll-behavior:auto !important; }
+    *, *::before, *::after { animation-duration:.01ms !important; animation-delay:0s !important; transition-duration:.01ms !important; transition-delay:0s !important; scroll-behavior:auto !important; }
   }
-
-  /* ===== Redesign: light pages, pills, magazine grid ===== */
-  html.lt, html.lt body { background:#FBF8F3; color:#2b2418; color-scheme: light; }
-  html.lt a:focus-visible, html.lt button:focus-visible { outline-color:#2b2418; }
-  .pill { display:inline-flex; align-items:center; justify-content:center; gap:.5rem; min-height:56px; padding:0 2rem; border-radius:999px;
-          font:700 1.15rem Manrope, system-ui, sans-serif; cursor:pointer; transition:transform .2s ease, filter .2s; }
-  .pill:hover { filter:brightness(1.06); transform:translateY(-2px); }
-  .pill:active { transform:scale(.97); }
-  .pill-sm { min-height:44px; padding:0 1.25rem; font-size:.95rem; }
-  .pill-ghost { border:1.5px solid currentColor; background:transparent; }
-  #reveal { position:fixed; inset:0; z-index:70; pointer-events:none; visibility:hidden;
-            clip-path:circle(0 at var(--x,50%) var(--y,50%)); transition:clip-path .75s cubic-bezier(.77,0,.18,1), opacity .4s ease; }
-  #reveal.go { visibility:visible; clip-path:circle(150vmax at var(--x,50%) var(--y,50%)); }
-  #reveal.go.out { opacity:0; }
-  #sec-state .text-mute { color:inherit; opacity:.8; }
-
-  .mag { --tile:#1a1a1a; display:grid; grid-template-columns:repeat(2,1fr); grid-auto-rows:clamp(150px,42vw,260px); grid-auto-flow:dense; gap:10px; }
-  .mag.lts { --tile:#FFFEF9; }
-  .mag > .card { background:var(--tile); border-radius:clamp(18px,4vw,30px); }
-  .mag > .t-h { grid-column:span 2; grid-row:span 2; }
-  .mag > .t-w { grid-column:span 2; }
-  .mag > .t-t { grid-row:span 2; }
-  @media (min-width:768px){ .mag { grid-template-columns:repeat(4,1fr); grid-auto-rows:clamp(170px,20vw,250px); gap:14px; } }
-  @media (min-width:1100px){ .mag { grid-template-columns:repeat(6,1fr); } }
-  .lts .skel { background:linear-gradient(110deg,#FFFEF9 30%,#f1ecde 50%,#FFFEF9 70%); background-size:200% 100%; }
-
-  .hero-zoom .ph-img { transform:scale(1.14); transition:opacity 1.3s ease, transform 2s cubic-bezier(.2,.7,.2,1); }
-  .hero-zoom.in .ph-img.loaded { transform:scale(1); opacity:1; }
-  .hero-zoom.in:hover .ph-img.loaded { transform:scale(1.03); transition-duration:.6s; }
-  .mag > .c-1 { grid-column:span 1; } .mag > .c-2 { grid-column:span 2; } .mag > .c-3 { grid-column:span 3; } .mag > .c-4 { grid-column:span 4; }
-  .mag > .r-1 { grid-row:span 1; } .mag > .r-2 { grid-row:span 2; } .mag > .r-3 { grid-row:span 3; } .mag > .r-4 { grid-row:span 4; }
-  @media (max-width:767px){ .mag > .c-3, .mag > .c-4 { grid-column:span 2; } }
-  .drag-h { display:none; align-items:center; justify-content:center; touch-action:none; cursor:grab; }
-  .has-sort .drag-h { display:inline-flex; }
-  .sortable-chosen { box-shadow:0 8px 28px rgba(0,0,0,.45); }
-  .sortable-ghost { opacity:.35; }
-
-  /* ===== New front page ===== */
-  .lf { width:100%; min-height:48px; padding:0 14px; font-size:16px; background:#FFFEF9; border:1px solid rgba(90,70,35,.2); border-radius:12px; color:#2b2418; }
-  textarea.lf { padding:12px 14px; min-height:110px; }
-  .lf::placeholder { color:#a39682; }
-  .lbl { display:block; font-size:.65rem; letter-spacing:.2em; text-transform:uppercase; color:#8a7c64; margin-bottom:6px; }
-  .chip { min-height:40px; padding:0 1rem; border-radius:8px; font-size:.8rem; border:1px solid rgba(90,70,35,.2); color:#6b5f4a; background:transparent; cursor:pointer; }
-  .chip.on { background:#4a3f35; color:#FBF8F3; border-color:#4a3f35; }
-  .marq { display:flex; width:max-content; animation:marq 30s linear infinite; }
-  @keyframes marq { to { transform:translateX(-50%); } }
-  .feat { border:1px solid rgba(255,255,255,.12); border-radius:10px; padding:14px; }
-  .navlink { font-size:.85rem; color:#5a4623; }
-  .navlink:hover { color:#a67c52; }
 </style>
 </head>
 
-<body class="bg-ink font-sans text-white antialiased">
+<body class="font-sans text-white antialiased">
 
 <noscript><p style="padding:2rem;text-align:center;color:#a0a0a0">This site needs JavaScript to display photos.</p></noscript>
 
-<!-- Toast -->
 <div id="toast" role="status" aria-live="polite"
-     class="glass glass-strong toast-pos is-hidden pointer-events-none fixed left-1/2 z-[80] max-w-[90vw] -translate-x-1/2 rounded-full px-5 py-3 text-center text-sm"></div>
+     class="glass glass-strong toast-pos is-hidden pointer-events-none fixed left-1/2 z-[120] max-w-[90vw] -translate-x-1/2 rounded-full px-5 py-3 text-center text-sm"></div>
 
-<!-- ============================================================
-     VIEW 1 — PUBLIC PORTFOLIO
-     ============================================================ -->
-<section id="view-portfolio" class="is-hidden" style="color:#2b2418">
-  <header class="safe-top sticky top-0 z-40" style="background:rgba(251,248,243,.92);backdrop-filter:blur(10px);-webkit-backdrop-filter:blur(10px);border-bottom:1px solid rgba(90,70,35,.12)">
-    <div class="mx-auto flex max-w-[1200px] items-center justify-between gap-3 px-4 py-3 sm:px-6">
+<div id="curtain" class="is-hidden"><span class="font-display">Ompha <em>Visuals</em></span></div>
+
+<section id="view-portfolio" class="is-hidden">
+  <header id="p-head" class="p-head safe-top">
+    <div class="wrap flex items-center justify-between gap-3 py-3">
       <a href="#top" class="flex items-center gap-2 font-display text-2xl">
         <img data-logo class="is-hidden h-9 w-auto" alt="Ompha Visuals">
-        <span data-brandname>Ompha <em style="color:#a67c52">Visuals</em></span>
+        <span data-brandname>Ompha <em style="color:var(--acc)">Visuals</em></span>
       </a>
-      <nav class="hidden items-center gap-6 md:flex">
+      <nav class="hidden items-center gap-8 md:flex">
         <a class="navlink" href="#work">Work</a><a class="navlink" href="#about">About</a><a class="navlink" href="#packages">Packages</a><a class="navlink" href="#gallery">Client Gallery</a><a class="navlink" href="#contact">Contact</a>
       </nav>
-      <a href="#contact" class="pill pill-sm" style="background:#4a3f35;color:#FBF8F3">Book a session</a>
+      <a href="#contact" class="pill pill-sm pill-d">Book a session</a>
     </div>
   </header>
 
-  <section id="top" class="mx-auto grid max-w-[1200px] items-center gap-10 px-5 pb-14 pt-10 sm:px-6 md:grid-cols-2 md:pt-16">
+  <section id="top" class="wrap grid items-center gap-14 pb-24 pt-10 md:grid-cols-2 md:pt-20">
     <div>
-      <p class="eyebrow" style="color:#a67c52">Portrait &middot; Sports &middot; Photographer</p>
-      <h1 class="mt-5 font-display font-medium leading-[.95]" style="font-size:clamp(3rem,12vw,6rem)">Stories told in soft, <em style="color:#a67c52">honest</em> light.</h1>
-      <p id="c-bio" class="mt-6 max-w-md text-sm leading-relaxed" style="color:#6b5f4a"></p>
-      <div class="mt-8 flex flex-wrap gap-3">
-        <a href="#work" class="pill pill-sm" style="background:#a67c52;color:#FBF8F3">View portfolio &darr;</a>
-        <a href="#packages" class="pill pill-sm pill-ghost">See packages</a>
+      <p class="eyebrow rv" style="--d:1s">Portrait &middot; Sports &middot; Photographer</p>
+      <h1 class="hero-h font-display mt-6">
+        <span class="ln"><span style="--d:0s">Stories told in</span></span>
+        <span class="ln"><span style="--d:.12s">soft, <em>honest</em></span></span>
+        <span class="ln"><span style="--d:.24s">light.</span></span>
+      </h1>
+      <p id="c-bio" class="t-mut rv mt-7 max-w-md text-sm leading-relaxed" style="--d:1.5s"></p>
+      <div class="rv mt-9 flex flex-wrap gap-3" style="--d:1.7s">
+        <a href="#work" class="pill pill-sm pill-d">View portfolio &darr;</a>
+        <a href="#packages" class="pill pill-sm pill-o">See packages</a>
       </div>
     </div>
     <div class="relative mx-auto w-full max-w-md">
-      <div class="skel overflow-hidden rounded-3xl" style="aspect-ratio:4/5;background-color:#EDE4D6"><img id="hero-a" class="is-hidden h-full w-full object-cover" alt="Ompha Visuals featured photo"></div>
-      <div class="skel absolute -bottom-6 -left-4 w-[42%] overflow-hidden rounded-2xl border-4" style="aspect-ratio:1/1;border-color:#FBF8F3;background-color:#EDE4D6"><img id="hero-b" class="is-hidden h-full w-full object-cover" alt=""></div>
+      <div class="clip skel overflow-hidden rounded-[28px]" style="aspect-ratio:4/5;--d:1.1s"><img id="hero-a" class="is-hidden h-full w-full object-cover" alt="Ompha Visuals featured photo"></div>
+      <div class="clip skel absolute -bottom-6 -left-4 w-[42%] overflow-hidden rounded-2xl" style="aspect-ratio:1/1;border:4px solid var(--bg);--d:1.5s"><img id="hero-b" class="is-hidden h-full w-full object-cover" alt=""></div>
     </div>
   </section>
 
-  <div class="mt-10 overflow-hidden py-5" style="border-block:1px solid rgba(90,70,35,.15)"><div id="marq" class="marq font-display text-3xl sm:text-4xl" style="color:#5a4623"></div></div>
+  <div class="overflow-hidden py-6" style="border-block:1px solid var(--line)"><div id="marq" class="marq font-display text-3xl sm:text-5xl"></div></div>
 
-  <section id="work" class="mx-auto max-w-[1200px] px-4 pb-20 pt-16 sm:px-6">
-    <div class="mb-8 flex flex-wrap items-end justify-between gap-4">
+  <section id="work" class="wrap pb-24 pt-24">
+    <div class="rv mb-10 flex flex-wrap items-end justify-between gap-4">
       <div>
-        <p class="eyebrow" style="color:#a67c52">01 &mdash; Selected work</p>
-        <h2 class="mt-2 font-display text-5xl font-medium">The <em>portfolio</em></h2>
+        <p class="eyebrow">01 &mdash; Selected work</p>
+        <h2 class="font-display mt-3 text-5xl sm:text-6xl">The <em>portfolio</em></h2>
       </div>
       <div id="chips" class="flex flex-wrap gap-2"></div>
     </div>
@@ -208,87 +240,87 @@
     <div id="sec-state"></div>
   </section>
 
-  <section id="about" class="px-5 py-20 sm:px-6" style="background:#EDE4D6">
-    <div class="mx-auto max-w-[1200px]">
-      <div class="grid items-center gap-10 md:grid-cols-[1fr_1.4fr]">
-        <div id="about-photo" class="is-hidden overflow-hidden rounded-2xl" style="aspect-ratio:4/5"><img id="hero-c" class="h-full w-full object-cover" alt=""></div>
-        <div>
-          <p class="eyebrow" style="color:#a67c52">02 &mdash; About</p>
-          <h2 class="mt-3 font-display text-4xl font-medium leading-tight sm:text-5xl">Unhurried sessions, <em style="color:#a67c52">warm</em> direction &amp; images made to last generations.</h2>
-          <p class="mt-5 max-w-xl text-sm leading-relaxed" style="color:#6b5f4a">Every client receives a private online gallery with full-resolution downloads, so your story is always one tap away.</p>
+  <section id="about" class="py-24" style="background:#ebe8e1">
+    <div class="wrap">
+      <div class="grid items-center gap-12 md:grid-cols-[1fr_1.4fr]">
+        <div id="about-photo" class="clip is-hidden overflow-hidden rounded-[24px]" style="aspect-ratio:4/5"><img id="hero-c" class="h-full w-full object-cover" alt=""></div>
+        <div class="rv">
+          <p class="eyebrow">02 &mdash; About</p>
+          <h2 class="font-display mt-4 text-4xl leading-tight sm:text-6xl">Unhurried sessions, <em style="color:var(--acc)">warm</em> direction &amp; images made to last generations.</h2>
+          <p class="t-mut mt-6 max-w-xl text-sm leading-relaxed">Every client receives a private online gallery with full-resolution downloads, so your story is always one tap away.</p>
         </div>
       </div>
-      <div class="mt-14 grid gap-px overflow-hidden rounded-xl sm:grid-cols-2 lg:grid-cols-4" style="background:rgba(90,70,35,.15)">
-        <div class="p-5" style="background:#F3EBDD"><p class="eyebrow">/01</p><h3 class="mt-3 font-display text-2xl">Say hello</h3><p class="mt-1 text-sm" style="color:#6b5f4a">Message on WhatsApp or the form and tell me about your day.</p></div>
-        <div class="p-5" style="background:#F3EBDD"><p class="eyebrow">/02</p><h3 class="mt-3 font-display text-2xl">Lock the date</h3><p class="mt-1 text-sm" style="color:#6b5f4a">Pick a package and secure your booking.</p></div>
-        <div class="p-5" style="background:#F3EBDD"><p class="eyebrow">/03</p><h3 class="mt-3 font-display text-2xl">The shoot</h3><p class="mt-1 text-sm" style="color:#6b5f4a">Relaxed, gently guided and full of real moments.</p></div>
-        <div class="p-5" style="background:#F3EBDD"><p class="eyebrow">/04</p><h3 class="mt-3 font-display text-2xl">Your gallery</h3><p class="mt-1 text-sm" style="color:#6b5f4a">A private, PIN-protected gallery with full-res downloads.</p></div>
+      <div class="rv mt-16 grid gap-px overflow-hidden rounded-2xl sm:grid-cols-2 lg:grid-cols-4" style="background:var(--line)">
+        <div class="step"><p class="eyebrow">/01</p><h3 class="font-display mt-3 text-2xl">Say hello</h3><p class="t-mut mt-1 text-sm">Message on WhatsApp or the form and tell me about your day.</p></div>
+        <div class="step"><p class="eyebrow">/02</p><h3 class="font-display mt-3 text-2xl">Lock the date</h3><p class="t-mut mt-1 text-sm">Pick a package and secure your booking.</p></div>
+        <div class="step"><p class="eyebrow">/03</p><h3 class="font-display mt-3 text-2xl">The shoot</h3><p class="t-mut mt-1 text-sm">Relaxed, gently guided and full of real moments.</p></div>
+        <div class="step"><p class="eyebrow">/04</p><h3 class="font-display mt-3 text-2xl">Your gallery</h3><p class="t-mut mt-1 text-sm">A private, PIN-protected gallery with full-res downloads.</p></div>
       </div>
     </div>
   </section>
 
-  <section id="packages" class="mx-auto max-w-[1200px] px-5 py-20 text-center sm:px-6">
-    <p class="eyebrow" style="color:#a67c52">03 &mdash; Pricing &amp; packages</p>
-    <h2 class="mt-3 font-display text-5xl font-medium">Choose your <em>story</em></h2>
-    <p class="mt-3 text-sm" style="color:#6b5f4a">Tap Book now to message me on WhatsApp with your package already filled in.</p>
-    <div id="c-pkgs" class="mt-10 grid gap-5 text-left sm:grid-cols-3"></div>
+  <section id="packages" class="wrap py-24 text-center">
+    <div class="rv">
+      <p class="eyebrow">03 &mdash; Pricing &amp; packages</p>
+      <h2 class="font-display mt-4 text-5xl sm:text-6xl">Choose your <em>story</em></h2>
+      <p class="t-mut mt-4 text-sm">Tap Book now to message me on WhatsApp with your package already filled in.</p>
+    </div>
+    <div id="c-pkgs" class="mt-12 grid gap-5 text-left sm:grid-cols-3"></div>
   </section>
 
-  <section id="gallery" class="px-5 py-20 sm:px-6" style="background:#4a3f35;color:#FBF8F3">
-    <div class="mx-auto grid max-w-[1200px] items-center gap-10 md:grid-cols-2">
-      <div>
-        <p class="eyebrow" style="color:#c9a77c">04 &mdash; Private gallery</p>
-        <h2 class="mt-3 font-display text-5xl font-medium leading-tight">Your photos, <em style="color:#d9c3a0">beautifully</em> delivered.</h2>
-        <p class="mt-4 max-w-md text-sm opacity-80">Every session comes with a private online gallery. Save any image in full resolution, or download them all at once &mdash; on desktop or phone.</p>
-        <div class="mt-8 grid gap-3 sm:grid-cols-2 text-sm">
-          <div class="feat"><p class="font-display text-lg">Full resolution</p><p class="opacity-70">Tap the arrow on any photo to save the original file.</p></div>
-          <div class="feat"><p class="font-display text-lg">Bulk download</p><p class="opacity-70">Save everything in one go, or request a single ZIP.</p></div>
-          <div class="feat"><p class="font-display text-lg">PIN protected</p><p class="opacity-70">Only the people you share with can view.</p></div>
-          <div class="feat"><p class="font-display text-lg">Phone friendly</p><p class="opacity-70">Saves straight to your Photos or Gallery app.</p></div>
+  <section id="gallery" class="dk py-24">
+    <div class="wrap grid items-center gap-12 md:grid-cols-2">
+      <div class="rv">
+        <p class="eyebrow">04 &mdash; Private gallery</p>
+        <h2 class="font-display mt-4 text-5xl leading-tight sm:text-6xl">Your photos, <em>beautifully</em> delivered.</h2>
+        <p class="mt-5 max-w-md text-sm opacity-75">Every session comes with a private online gallery. Save any image in full resolution, or download them all at once &mdash; on desktop or phone.</p>
+        <div class="mt-9 grid gap-3 text-sm sm:grid-cols-2">
+          <div class="feat"><p class="font-display text-xl">Full resolution</p><p class="mt-1 opacity-70">Tap the arrow on any photo to save the original file.</p></div>
+          <div class="feat"><p class="font-display text-xl">Bulk download</p><p class="mt-1 opacity-70">Save everything as one ZIP, or one photo at a time.</p></div>
+          <div class="feat"><p class="font-display text-xl">PIN protected</p><p class="mt-1 opacity-70">Only the people you share with can view.</p></div>
+          <div class="feat"><p class="font-display text-xl">Phone friendly</p><p class="mt-1 opacity-70">Saves straight to your Photos or Gallery app.</p></div>
         </div>
       </div>
-      <form id="g-form" class="rounded-2xl p-6" style="background:#FFFEF9;color:#2b2418" autocomplete="off">
-        <p class="eyebrow" style="color:#a67c52">Client access</p>
-        <h3 class="mt-1 font-display text-3xl">Open your gallery</h3>
-        <label class="lbl mt-5" for="g-id">Gallery ID</label>
-        <input id="g-id" class="lf" type="text" placeholder="e.g. lerato-tumi-2024" autocapitalize="off" autocorrect="off" spellcheck="false" required>
-        <label class="lbl mt-4" for="g-pin">Gallery PIN (optional)</label>
-        <input id="g-pin" class="lf" type="password" inputmode="numeric" maxlength="8" placeholder="&bull;&bull;&bull;&bull;">
+      <form id="g-form" class="rv rounded-[24px] p-7" style="background:#f6f5f2;color:#111;--fg:#111;--bg:#f6f5f2;--mut:#6f6e69;--line:rgba(17,17,17,.14);--d:.15s" autocomplete="off">
+        <p class="eyebrow">Client access</p>
+        <h3 class="font-display mt-1 text-4xl">Open your gallery</h3>
+        <label class="lbl mt-6" for="g-id">Gallery ID or link</label>
+        <input id="g-id" class="lf" type="text" placeholder="Paste your gallery ID or link" autocapitalize="off" autocorrect="off" spellcheck="false" required>
         <p id="g-err" class="mt-2 h-4 text-xs text-red-700" role="alert"></p>
-        <button type="submit" class="pill pill-sm mt-2 w-full" style="background:#a67c52;color:#FBF8F3">View my photos &rarr;</button>
-        <p class="mt-3 text-center text-xs" style="color:#6b5f4a">Your link and PIN were sent with your delivery message.</p>
+        <button type="submit" class="pill pill-sm pill-d mt-3 w-full">View my photos &rarr;</button>
+        <p class="t-mut mt-4 text-center text-xs">If your gallery is protected, you&rsquo;ll be asked for your PIN next.</p>
       </form>
     </div>
   </section>
 
-  <section id="contact" class="mx-auto max-w-[1200px] px-5 py-20 sm:px-6">
-    <div class="grid gap-10 md:grid-cols-2">
-      <div>
-        <p class="eyebrow" style="color:#a67c52">05 &mdash; Contact &amp; booking</p>
-        <h2 class="mt-3 font-display text-5xl font-medium leading-tight">Let&rsquo;s make something <em style="color:#a67c52">timeless.</em></h2>
-        <p class="mt-4 max-w-md text-sm" style="color:#6b5f4a">Dates for the season book fast. Send a note and I&rsquo;ll reply within a day &mdash; or message me directly on WhatsApp.</p>
-        <div id="c-links" class="mt-8 flex flex-wrap gap-3"></div>
+  <section id="contact" class="wrap py-24">
+    <div class="grid gap-12 md:grid-cols-2">
+      <div class="rv">
+        <p class="eyebrow">05 &mdash; Contact &amp; booking</p>
+        <h2 class="font-display mt-4 text-5xl leading-tight sm:text-6xl">Let&rsquo;s make something <em style="color:var(--acc)">timeless.</em></h2>
+        <p class="t-mut mt-5 max-w-md text-sm">Dates for the season book fast. Send a note and I&rsquo;ll reply within a day &mdash; or message me directly on WhatsApp.</p>
+        <div id="c-links" class="mt-9 flex flex-wrap gap-3"></div>
       </div>
-      <form id="c-form" class="rounded-2xl p-6" style="background:#F3EBDD">
+      <form id="c-form" class="rv rounded-[24px] p-7" style="background:#ebe8e1;--d:.15s">
         <div class="grid gap-4 sm:grid-cols-2">
           <div><label class="lbl" for="cf-name">Your name</label><input id="cf-name" class="lf" type="text" placeholder="Your name" required></div>
           <div><label class="lbl" for="cf-type">Session type</label><select id="cf-type" class="lf"><option>Portraits</option><option>Sports</option><option>Other</option></select></div>
-          <div class="sm:col-span-2"><label class="lbl" for="cf-date">Preferred date</label><input id="cf-date" class="lf" type="date"></div>
+          <div class="sm:col-span-2"><label class="lbl" for="cf-date">Preferred date</label><input id="cf-date" class="lf" type="date" style="color-scheme:light"></div>
           <div class="sm:col-span-2"><label class="lbl" for="cf-msg">Tell me about it</label><textarea id="cf-msg" class="lf" placeholder="Your day, your vibe, anything you&rsquo;d love captured&hellip;"></textarea></div>
         </div>
-        <button type="submit" class="pill pill-sm mt-5" style="background:#4a3f35;color:#FBF8F3">Send enquiry &rarr;</button>
-        <p class="mt-3 text-xs" style="color:#6b5f4a">Opens WhatsApp with your details filled in.</p>
+        <button type="submit" class="pill pill-sm pill-d mt-6">Send enquiry &rarr;</button>
+        <p class="t-mut mt-3 text-xs">Opens WhatsApp with your details filled in.</p>
       </form>
     </div>
   </section>
 
-  <footer class="px-5 py-14 sm:px-6" style="background:#4a3f35;color:#FBF8F3">
-    <div class="mx-auto max-w-[1200px]">
+  <footer class="dk py-16">
+    <div class="wrap">
       <div class="flex flex-wrap items-center justify-between gap-6">
-        <a href="#contact" class="font-display font-medium" style="font-size:clamp(2.5rem,9vw,5rem)">Book your <em style="color:#c9a77c">date</em> &rarr;</a>
+        <a href="#contact" class="font-display" style="font-size:clamp(2.5rem,9vw,5.5rem);line-height:1">Book your <em style="color:#c9b28a">date</em> &rarr;</a>
         <img data-logo class="is-hidden h-14 w-auto" alt="Ompha Visuals">
       </div>
-      <div class="mt-10 flex flex-wrap items-center justify-between gap-3 pt-6 text-xs opacity-70" style="border-top:1px solid rgba(255,255,255,.15)">
+      <div class="mt-12 flex flex-wrap items-center justify-between gap-3 pt-6 text-xs opacity-70" style="border-top:1px solid var(--line)">
         <span>&copy; <span id="yr"></span> Ompha Visuals &mdash; all rights reserved</span>
         <span class="flex gap-5"><a href="#work">Work</a><a href="#packages">Packages</a><a href="#gallery">Client login</a></span>
       </div>
@@ -297,52 +329,68 @@
   </footer>
 </section>
 
-<!-- ============================================================
-     VIEW 2 — CLIENT GALLERY  (?gallery=CLIENT_ID)
-     ============================================================ -->
 <section id="view-gallery" class="is-hidden">
-  <!-- Top action bar -->
-  <header class="safe-top sticky top-0 z-30 border-b border-white/5 bg-ink/80 backdrop-blur-md">
-    <div class="mx-auto flex min-h-[60px] max-w-7xl items-center gap-3 px-4 py-2 sm:px-6">
-      <a href="./" class="flex shrink-0 items-center gap-2 font-display text-xl font-medium tracking-wide"><img data-logo class="is-hidden h-8 w-auto" alt="Ompha Visuals"><span data-brand data-brandname>Ompha Visuals</span></a>
-      <p id="g-bar-title" class="min-w-0 flex-1 truncate text-right text-sm text-mute sm:pl-4 sm:text-left"></p>
-      <span id="g-count" class="is-hidden hidden shrink-0 text-sm text-mute sm:block"></span>
-      <button id="g-zip-top" type="button" class="glass tap is-hidden hidden shrink-0 items-center justify-center gap-2 rounded-full px-5 text-sm md:inline-flex">
-        <span data-icon="download" data-cls="h-[18px] w-[18px]"></span><span>Download All (.ZIP)</span>
-      </button>
-    </div>
-  </header>
+  <div id="g-load" class="fixed inset-0 z-30 flex items-center justify-center"><div class="h-8 w-8 animate-spin rounded-full border-2 border-white/20 border-t-white"></div></div>
 
-  <main class="mx-auto max-w-7xl px-4 pb-32 pt-8 sm:px-6 md:pb-16">
-    <div class="mb-8">
-      <p class="eyebrow">Private gallery</p>
-      <h1 id="g-title" class="mt-2 font-display text-4xl leading-tight sm:text-5xl"></h1>
-      <p id="g-date" class="mt-2 text-mute"></p>
-      <p class="mt-4 max-w-lg text-sm text-mute">Tap the arrow on any photo to save it in full resolution.</p>
-    </div>
-    <div id="gallery-grid" class="mag"></div>
-    <div id="gallery-state"></div>
-  </main>
-
-  <!-- Sticky mobile bottom bar -->
-  <div id="g-bottombar" class="safe-bottom is-hidden fixed inset-x-0 bottom-0 z-30 border-t border-white/10 bg-ink/70 px-4 pt-3 backdrop-blur-xl md:hidden">
-    <div class="flex items-center gap-3">
-      <div class="min-w-0 flex-1">
-        <p id="g-count-m" class="text-sm text-white"></p>
-        <p class="text-xs text-mute">Full resolution</p>
-      </div>
-      <button id="g-zip-bottom" type="button" class="glass glass-strong tap inline-flex shrink-0 items-center justify-center gap-2 rounded-full px-5 text-sm font-medium">
-        <span data-icon="download" data-cls="h-[18px] w-[18px]"></span><span>Download All (.ZIP)</span>
-      </button>
+  <div id="g-welcome" class="is-hidden fixed inset-0 z-40">
+    <div class="wl-bg"><img id="wl-img" alt=""></div>
+    <div class="wl-shade"></div>
+    <div class="safe-top absolute left-0 top-0 p-6"><span data-brand class="font-display text-xl tracking-wide text-white/90">Ompha Visuals</span></div>
+    <div class="wl-content">
+      <p class="eyebrow" style="color:rgba(255,255,255,.7)">Private gallery</p>
+      <h1 id="wl-title" class="font-display mt-3 leading-[.95]" style="font-size:clamp(2.8rem,10vw,6.5rem);letter-spacing:-.02em"></h1>
+      <p id="wl-meta" class="mt-4 text-sm text-white/70"></p>
+      <button id="wl-go" type="button" class="pill pill-w mt-8">View gallery <span aria-hidden="true">&rarr;</span></button>
     </div>
   </div>
 
-  <!-- Optional PIN overlay -->
+  <div id="g-main" class="is-hidden">
+    <header class="safe-top sticky top-0 z-30 border-b border-white/5 bg-ink/80 backdrop-blur-md">
+      <div class="mx-auto flex min-h-[60px] max-w-7xl items-center gap-3 px-4 py-2 sm:px-6">
+        <a href="./" class="flex shrink-0 items-center gap-2 font-display text-xl tracking-wide"><img data-logo class="is-hidden h-8 w-auto" alt="Ompha Visuals"><span data-brand data-brandname>Ompha Visuals</span></a>
+        <p id="g-bar-title" class="min-w-0 flex-1 truncate text-right text-sm text-mute sm:pl-4 sm:text-left"></p>
+        <span id="g-count" class="is-hidden hidden shrink-0 text-sm text-mute sm:block"></span>
+        <button id="g-zip-top" type="button" class="glass tap is-hidden hidden shrink-0 items-center justify-center gap-2 rounded-full px-5 text-sm md:inline-flex">
+          <span data-icon="download" data-cls="h-[18px] w-[18px]"></span><span>Download All</span>
+        </button>
+      </div>
+    </header>
+
+    <main class="mx-auto max-w-7xl px-4 pb-32 pt-8 sm:px-6 md:pb-16">
+      <div class="mb-8">
+        <p class="eyebrow">Private gallery</p>
+        <h1 id="g-title" class="font-display mt-2 text-4xl leading-tight sm:text-6xl"></h1>
+        <p id="g-date" class="mt-2 text-mute"></p>
+        <p class="mt-4 max-w-lg text-sm text-mute">Tap the arrow on any photo to save it in full resolution.</p>
+      </div>
+      <div id="gallery-grid" class="mag"></div>
+      <div id="gallery-state"></div>
+
+      <section id="g-files" class="is-hidden mt-20">
+        <p class="eyebrow">Files</p>
+        <h2 class="font-display mt-2 text-3xl sm:text-4xl">Your files</h2>
+        <ul id="g-files-list" class="mt-6 divide-y divide-white/10 overflow-hidden rounded-2xl border border-white/10 bg-card"></ul>
+      </section>
+    </main>
+
+    <div id="g-bottombar" class="safe-bottom is-hidden fixed inset-x-0 bottom-0 z-30 border-t border-white/10 bg-ink/70 px-4 pt-3 backdrop-blur-xl md:hidden">
+      <div class="flex items-center gap-3">
+        <div class="min-w-0 flex-1">
+          <p id="g-count-m" class="text-sm text-white"></p>
+          <p class="text-xs text-mute">Full resolution</p>
+        </div>
+        <button id="g-zip-bottom" type="button" class="glass glass-strong tap inline-flex shrink-0 items-center justify-center gap-2 rounded-full px-5 text-sm font-medium">
+          <span data-icon="download" data-cls="h-[18px] w-[18px]"></span><span>Download All</span>
+        </button>
+      </div>
+    </div>
+  </div>
+
   <div id="pin-overlay" class="is-hidden fixed inset-0 z-50 flex items-center justify-center bg-ink p-5">
     <form id="pin-form" class="w-full max-w-sm text-center" autocomplete="off">
       <div class="mx-auto mb-5 flex h-14 w-14 items-center justify-center rounded-full border border-white/10 bg-card" data-icon="lock" data-cls="h-6 w-6"></div>
       <p class="eyebrow">Private gallery</p>
-      <h2 id="pin-title" class="mt-2 font-display text-4xl leading-tight"></h2>
+      <h2 id="pin-title" class="font-display mt-2 text-4xl leading-tight"></h2>
       <p class="mt-3 text-sm text-mute">Enter the PIN you were sent to view your photos.</p>
       <input id="pin-input" class="field mt-6 text-center text-2xl tracking-[0.5em]" type="password" inputmode="numeric" autocomplete="off" maxlength="8" placeholder="••••" aria-label="Gallery PIN">
       <p id="pin-err" class="mt-3 h-5 text-sm text-red-400" role="alert"></p>
@@ -350,45 +398,33 @@
     </form>
   </div>
 
-  <!-- Bulk download instructions -->
   <div id="zip-modal" class="is-hidden fixed inset-0 z-[70] flex items-end justify-center bg-black/70 backdrop-blur-sm sm:items-center sm:p-5" role="dialog" aria-modal="true" aria-labelledby="zip-title">
-    <div class="safe-bottom max-h-[92vh] w-full max-w-md overflow-y-auto rounded-t-3xl border border-white/10 bg-card px-6 pt-6 sm:rounded-3xl">
+    <div id="zip-sheet" class="safe-bottom max-h-[92vh] w-full max-w-md overflow-y-auto rounded-t-3xl border border-white/10 bg-card px-6 pt-6 sm:rounded-3xl">
       <p class="eyebrow">Bulk download</p>
-      <h2 id="zip-title" class="mt-2 font-display text-3xl">Download all photos</h2>
-      <p class="mt-3 text-sm text-mute">Phones can&rsquo;t build a ZIP file on their own, so your photos are saved one after another instead &mdash; the same full-resolution files, nothing lost.</p>
-
-      <ol class="mt-5 space-y-4 text-sm text-[#d0d0d0]">
-        <li class="flex gap-3"><span class="step-n">1</span><span>Tap <strong class="font-medium text-white">Download all photos</strong> below. One photo is saved about every second.</span></li>
-        <li class="flex gap-3"><span class="step-n">2</span><span>If your browser asks to allow multiple downloads, tap <strong class="font-medium text-white">Allow</strong>.</span></li>
-        <li class="flex gap-3"><span class="step-n">3</span><span>Find them afterwards. <strong class="font-medium text-white">iPhone:</strong> Files &rarr; Downloads, select all, then Share &rarr; Save Images. <strong class="font-medium text-white">Android:</strong> Downloads folder or your Gallery.</span></li>
-      </ol>
-
+      <h2 id="zip-title" class="font-display mt-2 text-3xl">Download all photos</h2>
+      <p class="mt-3 text-sm text-mute">Full-resolution originals. Keep this page open until it finishes. If your browser asks to allow multiple downloads, tap <strong class="font-medium text-white">Allow</strong>.</p>
       <div id="zip-progress" class="is-hidden mt-5">
         <div class="h-1.5 overflow-hidden rounded-full bg-white/10"><div id="zip-bar" class="h-full rounded-full bg-white transition-all" style="width:0"></div></div>
         <p id="zip-status" class="mt-2 text-xs text-mute" aria-live="polite"></p>
       </div>
-
       <div class="mt-6 flex flex-col gap-2">
-        <button id="zip-run" type="button" class="glass glass-strong tap inline-flex items-center justify-center gap-2 rounded-xl text-sm font-medium">
-          <span data-icon="download"></span><span id="zip-run-label">Download all photos</span>
+        <button id="zip-run-zip" type="button" class="glass glass-strong tap inline-flex items-center justify-center gap-2 rounded-xl text-sm font-medium">
+          <span data-icon="download"></span><span id="zip-run-zip-label">Download as one ZIP</span>
         </button>
-        <a id="zip-endpoint" href="#" target="_blank" rel="noopener" class="glass tap is-hidden inline-flex items-center justify-center gap-2 rounded-xl text-sm">Download as one ZIP</a>
+        <button id="zip-run" type="button" class="glass tap inline-flex items-center justify-center gap-2 rounded-xl text-sm">
+          <span data-icon="download"></span><span id="zip-run-label">Download one by one</span>
+        </button>
         <button id="zip-close" type="button" class="tap rounded-xl text-sm text-mute">Close</button>
       </div>
-      <p id="zip-contact-wrap" class="mt-3 text-xs text-mute">Prefer a single ZIP file? <a id="zip-contact" href="#" target="_blank" rel="noopener" class="text-white underline underline-offset-4">Ask us and we&rsquo;ll send one.</a></p>
     </div>
   </div>
 </section>
 
-<!-- ============================================================
-     VIEW 3 — HIDDEN ADMIN  (?mode=admin)
-     ============================================================ -->
 <section id="view-admin" class="is-hidden">
-  <!-- PIN gate -->
   <div id="admin-lock" class="fixed inset-0 z-50 flex items-center justify-center bg-ink p-5">
     <form id="admin-lock-form" class="w-full max-w-sm rounded-2xl border border-white/10 bg-card p-6 text-center" autocomplete="off">
       <div class="mx-auto mb-4 flex h-12 w-12 items-center justify-center rounded-full bg-white/5" data-icon="lock"></div>
-      <h1 class="font-display text-3xl">Admin</h1>
+      <h1 class="font-display text-4xl">Admin</h1>
       <p class="mt-1 text-sm text-mute">Enter your PIN to continue.</p>
       <input id="admin-pin" class="field mt-5 text-center text-xl tracking-[0.4em]" type="password" inputmode="numeric" autocomplete="off" placeholder="••••" aria-label="Admin PIN">
       <p id="admin-lock-err" class="mt-3 h-5 text-sm text-red-400" role="alert"></p>
@@ -397,12 +433,11 @@
     </form>
   </div>
 
-  <!-- Dashboard -->
   <div id="admin-panel" class="is-hidden mx-auto max-w-2xl px-4 pb-24 pt-6 sm:px-6">
     <header class="safe-top mb-6 flex items-center justify-between gap-3">
       <div>
         <p class="eyebrow" data-brand>Ompha Visuals</p>
-        <h1 class="font-display text-3xl">Dashboard</h1>
+        <h1 class="font-display text-4xl">Dashboard</h1>
       </div>
       <div class="flex gap-2">
         <a href="./" class="glass tap inline-flex items-center justify-center rounded-xl px-4 text-sm">View site</a>
@@ -413,7 +448,6 @@
     <div id="admin-banners" class="mb-4 space-y-2"></div>
 
     <div class="space-y-4">
-      <!-- Destination -->
       <div class="panel">
         <p class="label">Where are these photos going?</p>
         <div class="grid grid-cols-3 gap-2">
@@ -423,10 +457,9 @@
         </div>
       </div>
 
-      <!-- Gallery details -->
       <div id="card-details" class="panel">
         <div class="mb-4 flex items-center justify-between gap-3">
-          <h2 class="font-display text-2xl">Gallery details</h2>
+          <h2 class="font-display text-3xl">Gallery details</h2>
           <button id="btn-reset" type="button" class="glass tap rounded-xl px-4 text-sm">New gallery</button>
         </div>
         <div class="space-y-4">
@@ -440,7 +473,11 @@
           </div>
           <div>
             <label class="label" for="f-pin">Gallery PIN <span class="text-[#6b6b6b]">(optional)</span></label>
-            <input id="f-pin" class="field" type="text" inputmode="numeric" pattern="[0-9]*" maxlength="8" placeholder="4–8 digits" autocomplete="off">
+            <div class="flex gap-2">
+              <input id="f-pin" class="field" type="text" inputmode="numeric" pattern="[0-9]*" maxlength="8" placeholder="4–8 digits" autocomplete="off">
+              <button id="nopin" type="button" class="glass tap is-hidden shrink-0 rounded-xl px-4 text-sm">Remove PIN</button>
+            </div>
+            <p class="mt-2 text-xs text-mute">Clients are only asked for a PIN when you set one here.</p>
           </div>
           <div>
             <label class="label" for="f-id">Gallery ID</label>
@@ -450,12 +487,12 @@
             </div>
             <p id="id-note" class="mt-2 text-xs text-mute"></p>
           </div>
+          <button id="btn-save-meta" type="button" class="glass tap w-full rounded-xl text-sm">Save details</button>
         </div>
       </div>
 
-      <!-- Upload -->
       <div class="panel">
-        <h2 class="font-display text-2xl">Upload</h2>
+        <h2 class="font-display text-3xl">Upload photos</h2>
         <p id="upload-status" class="mt-1 text-sm text-mute"></p>
         <button id="btn-upload" type="button" class="glass glass-strong tap mt-4 inline-flex w-full items-center justify-center gap-2 rounded-xl text-sm font-medium">
           <span data-icon="upload"></span><span>Upload photos</span>
@@ -463,10 +500,21 @@
         <p id="portfolio-note" class="is-hidden mt-3 text-xs text-mute">Photos uploaded here appear on the public portfolio automatically.</p>
       </div>
 
-      <!-- Arrange & publish -->
+      <div id="card-files" class="panel">
+        <div class="flex items-center justify-between gap-3">
+          <h2 class="font-display text-3xl">Files</h2>
+          <button id="fl-refresh" type="button" class="glass tap rounded-xl px-4 text-sm">Refresh</button>
+        </div>
+        <p id="fl-status" class="mt-1 text-sm text-mute">ZIPs and other files shown to the client in a separate section. The section only appears once a file is uploaded.</p>
+        <button id="btn-files" type="button" class="glass glass-strong tap mt-4 inline-flex w-full items-center justify-center gap-2 rounded-xl text-sm font-medium">
+          <span data-icon="file"></span><span>Upload files</span>
+        </button>
+        <ul id="fl-list" class="mt-3 divide-y divide-white/5"></ul>
+      </div>
+
       <div id="card-stage" class="panel">
         <div class="flex items-center justify-between gap-3">
-          <h2 class="font-display text-2xl">Arrange &amp; publish</h2>
+          <h2 class="font-display text-3xl">Arrange &amp; publish</h2>
           <button id="st-load" type="button" class="glass tap rounded-xl px-4 text-sm">Load photos</button>
         </div>
         <p id="st-status" class="mt-1 text-sm text-mute"></p>
@@ -478,48 +526,50 @@
         <div id="st-list" class="is-hidden mt-4 space-y-3"></div>
         <div id="st-prev" class="mag is-hidden mt-4"></div>
         <div id="st-actions" class="is-hidden mt-4 grid grid-cols-2 gap-2">
-          <button id="st-auto" type="button" class="glass tap rounded-xl text-sm">Auto templates</button>
+          <button id="st-auto" type="button" class="glass tap rounded-xl text-sm">Reset layout</button>
           <button id="st-revert" type="button" class="glass tap rounded-xl text-sm">Reload live</button>
           <button id="st-publish" type="button" class="glass glass-strong tap col-span-2 rounded-xl text-sm font-medium">Publish live</button>
         </div>
       </div>
 
-      <!-- Link generator -->
       <div id="card-link" class="panel">
-        <h2 class="font-display text-2xl">Share link</h2>
-        <p class="mt-1 text-sm text-mute">Updates as you type. Send this to your client.</p>
-        <input id="link-out" class="field mt-4 text-sm" type="text" readonly aria-label="Gallery link">
-        <div class="mt-3 flex gap-2">
-          <button id="btn-copy" type="button" class="glass glass-strong tap inline-flex flex-1 items-center justify-center gap-2 rounded-xl text-sm"><span data-icon="copy" data-cls="h-[18px] w-[18px]"></span><span>Copy</span></button>
+        <h2 class="font-display text-3xl">Client access</h2>
+        <p class="mt-1 text-sm text-mute">Send the ID or the link. Both open the same gallery.</p>
+        <label class="label mt-4" for="id-out">Client ID</label>
+        <div class="flex gap-2">
+          <input id="id-out" class="field text-sm" type="text" readonly aria-label="Client ID">
+          <button id="btn-copy-id" type="button" class="glass tap inline-flex shrink-0 items-center justify-center gap-2 rounded-xl px-4 text-sm"><span data-icon="copy" data-cls="h-[18px] w-[18px]"></span><span>Copy</span></button>
+        </div>
+        <label class="label mt-4" for="link-out">Gallery link</label>
+        <input id="link-out" class="field text-sm" type="text" readonly aria-label="Gallery link">
+        <div class="mt-3 flex flex-wrap gap-2">
+          <button id="btn-copy" type="button" class="glass glass-strong tap inline-flex flex-1 items-center justify-center gap-2 rounded-xl text-sm"><span data-icon="copy" data-cls="h-[18px] w-[18px]"></span><span>Copy link</span></button>
           <a id="btn-open" href="#" target="_blank" rel="noopener" class="glass tap inline-flex flex-1 items-center justify-center gap-2 rounded-xl text-sm"><span data-icon="external" data-cls="h-[18px] w-[18px]"></span><span>Open</span></a>
-          <button id="btn-share" type="button" class="glass tap is-hidden inline-flex flex-1 items-center justify-center gap-2 rounded-xl text-sm"><span data-icon="share" data-cls="h-[18px] w-[18px]"></span><span>Share</span></button>
+          <button id="btn-share" type="button" class="glass tap is-hidden inline-flex w-full items-center justify-center gap-2 rounded-xl text-sm"><span data-icon="share" data-cls="h-[18px] w-[18px]"></span><span>Share with preview image</span></button>
         </div>
       </div>
 
-      <!-- Recent galleries -->
       <div id="card-recent" class="panel is-hidden">
         <div class="mb-3 flex items-center justify-between gap-3">
-          <h2 class="font-display text-2xl">Recent galleries</h2>
+          <h2 class="font-display text-3xl">Recent galleries</h2>
           <button id="btn-clear-recent" type="button" class="tap rounded-xl px-3 text-sm text-mute">Clear</button>
         </div>
         <ul id="recent-list" class="divide-y divide-white/5"></ul>
         <p class="mt-3 text-xs text-mute">Saved on this device only.</p>
       </div>
 
-      <!-- Logo -->
       <div class="panel">
-        <h2 class="font-display text-2xl">Logo</h2>
-        <p class="mt-1 text-sm text-mute">Shown in the site header, footer and gallery pages. With no logo, your text name is used.</p>
+        <h2 class="font-display text-3xl">Logo</h2>
+        <p class="mt-1 text-sm text-mute">Shown in the site header, footer, gallery pages and link previews. With no logo, your text name is used.</p>
         <div class="mt-4 flex items-center gap-3">
           <div class="flex h-16 w-32 shrink-0 items-center justify-center rounded-xl bg-white/5"><img id="logo-prev" data-logo class="is-hidden max-h-14 max-w-full object-contain" alt="Current logo"><span data-brandname class="text-xs text-mute">No logo</span></div>
           <button id="btn-logo" type="button" class="glass glass-strong tap flex-1 rounded-xl text-sm">Upload / replace logo</button>
         </div>
-        <p class="mt-3 text-xs text-mute">The newest upload is used. It can take a minute to appear on the site. To remove a logo, delete it from your Cloudinary Media Library.</p>
+        <p class="mt-3 text-xs text-mute">It can take a minute to appear on the site. To replace an existing logo, delete it from your Cloudinary Media Library first.</p>
       </div>
 
-      <!-- Setup check -->
       <div class="panel">
-        <h2 class="font-display text-2xl">Setup check</h2>
+        <h2 class="font-display text-3xl">Setup check</h2>
         <p class="mt-1 text-sm text-mute">Tests your Cloudinary settings — handy when you have no console on your phone.</p>
         <button id="btn-check" type="button" class="glass tap mt-4 w-full rounded-xl text-sm">Run check</button>
         <ul id="check-out" class="mt-4 space-y-2"></ul>
@@ -528,9 +578,6 @@
   </div>
 </section>
 
-<!-- ============================================================
-     SHARED — LIGHTBOX
-     ============================================================ -->
 <div id="lightbox" class="is-hidden fixed inset-0 z-[60] flex flex-col bg-ink/95 backdrop-blur-sm" role="dialog" aria-modal="true" aria-label="Photo viewer">
   <div class="safe-top flex items-center justify-between px-3 pb-2 pt-3 sm:px-5">
     <span id="lb-count" class="px-2 text-sm text-mute"></span>
@@ -549,85 +596,107 @@
   </div>
 </div>
 
+<div id="crop-modal" class="is-hidden fixed inset-0 z-[90] flex flex-col bg-black" role="dialog" aria-modal="true" aria-label="Crop and size">
+  <div class="safe-top flex items-center justify-between px-3 pb-2 pt-3">
+    <button id="cr-cancel" type="button" class="glass tap rounded-full px-5 text-sm">Cancel</button>
+    <div class="text-center"><p class="text-sm font-medium">Crop &amp; size</p><p id="cr-info" class="text-xs text-mute"></p></div>
+    <button id="cr-done" type="button" class="glass glass-strong tap rounded-full px-6 text-sm font-medium">Done</button>
+  </div>
+  <div id="cr-stage" class="relative flex min-h-0 flex-1 items-center justify-center p-6" style="touch-action:none">
+    <div id="cr-wrap" class="relative select-none">
+      <img id="cr-img" alt="" draggable="false" class="block h-full w-full select-none">
+      <div id="cr-shade" class="pointer-events-none absolute inset-0" style="background:rgba(0,0,0,.62)"></div>
+      <div id="cr-box" class="cr-box">
+        <i class="hd" data-h="nw"></i><i class="hd" data-h="n"></i><i class="hd" data-h="ne"></i><i class="hd" data-h="e"></i>
+        <i class="hd" data-h="se"></i><i class="hd" data-h="s"></i><i class="hd" data-h="sw"></i><i class="hd" data-h="w"></i>
+      </div>
+    </div>
+  </div>
+  <div class="safe-bottom space-y-3 px-3 pt-3">
+    <div id="cr-ratios" class="flex gap-2 overflow-x-auto pb-1"></div>
+    <div class="flex flex-wrap items-center gap-2">
+      <button id="cr-lock" type="button" class="glass tap inline-flex items-center justify-center gap-2 rounded-xl px-4 text-sm"></button>
+      <button id="cr-swap" type="button" class="glass tap rounded-xl px-4 text-sm" aria-label="Swap orientation">Swap</button>
+      <input id="cr-cw" class="field w-16 text-center text-sm" style="min-height:44px;padding:0 6px" type="text" inputmode="decimal" placeholder="W" aria-label="Ratio width">
+      <span class="text-mute">:</span>
+      <input id="cr-ch" class="field w-16 text-center text-sm" style="min-height:44px;padding:0 6px" type="text" inputmode="decimal" placeholder="H" aria-label="Ratio height">
+      <button id="cr-set" type="button" class="glass tap rounded-xl px-4 text-sm">Set</button>
+      <button id="cr-reset" type="button" class="glass tap rounded-xl px-4 text-sm">Reset</button>
+    </div>
+    <div>
+      <p class="mb-1 text-xs text-mute">Tile width on the grid (columns)</p>
+      <div id="cr-width" class="flex gap-2"></div>
+    </div>
+  </div>
+</div>
+
 <script>
 (() => {
   'use strict';
 
-  /* ==========================================================
-     CONFIG — edit these values
-     ========================================================== */
   const CONFIG = {
     BRAND: 'OmphaVisuals',
-
-    // Public sections. 'legacy' tags are merged in so photos you already tagged "portfolio" keep showing under Portraits.
     SECTIONS: {
-      portraits: { title: 'Portraits', tag: 'portraits', legacy: ['portfolio'], tone: '#B5A68C', ink: '#2b2418' },
-      sports:    { title: 'Sports',    tag: 'sports',    legacy: [],            tone: '#758548', ink: '#FBF8F3' }
+      portraits: { title: 'Portraits', tag: 'portraits', legacy: ['portfolio'] },
+      sports:    { title: 'Sports',    tag: 'sports',    legacy: [] }
     },
-
-    // Contact page copy and pricing. Edit freely.
     BIO: 'Ompha Visuals is a photographer capturing portraits and sports with an editorial eye. Message me to talk about your shoot.',
     PACKAGES: [
-      { name: 'Basic',    price: 100, blurb: 'A quick shoot with edited digital photos.',                bg: '#B5A68C', fg: '#2b2418' },
-      { name: 'Standard', price: 200, blurb: 'A longer session with more edited photos and variety.',    bg: '#758548', fg: '#FBF8F3' },
-      { name: 'Premium',  price: 450, blurb: 'The full session with the most edited photos delivered.',  bg: '#5a4623', fg: '#FBF8F3' }
+      { name: 'Basic',    price: 100, blurb: 'A quick shoot with edited digital photos.' },
+      { name: 'Standard', price: 200, blurb: 'A longer session with more edited photos and variety.' },
+      { name: 'Premium',  price: 450, blurb: 'The full session with the most edited photos delivered.' }
     ],
-
-    // Cloudinary: https://console.cloudinary.com
-    CLOUD_NAME: 'pbjrmzzv',          // Replace with your actual Cloudinary Cloud Name
-    UPLOAD_PRESET: 'v1hvfewj',              
-    PORTFOLIO_TAG: 'portfolio',             
-
-    ADMIN_PIN: '0150',                      // Change this to your preferred PIN
-
-    ZIP_ENDPOINT: ' ',
-    BULK_DELAY_MS: 900,                     
-
-    CONTACT: {                              
+    CLOUD_NAME: 'pbjrmzzv',
+    UPLOAD_PRESET: 'v1hvfewj',
+    PORTFOLIO_TAG: 'portfolio',
+    ADMIN_PIN: '0150',
+    BULK_DELAY_MS: 900,
+    CONTACT: {
       instagram: 'https://www.instagram.com/visualsbyompha?psln=MWFtcnJlY2l6N2tnbw==',
-      whatsapp: '27787034322',              
+      whatsapp: '27787034322',
       email: 'omphavisuals@gmail.com'
     }
   };
 
-  /* ==========================================================
-     Helpers
-     ========================================================== */
   const $ = (s, r = document) => r.querySelector(s);
   const $$ = (s, r = document) => Array.from(r.querySelectorAll(s));
   const show = (el, on = true) => { if (el) el.classList.toggle('is-hidden', !on); };
   const sleep = ms => new Promise(r => setTimeout(r, ms));
+  const clamp = (v, a, b) => Math.min(b, Math.max(a, v));
+  const clampN = (v, a, b) => Math.min(b, Math.max(a, Math.round(+v) || a));
   const isDemo = () => !CONFIG.CLOUD_NAME || CONFIG.CLOUD_NAME === 'YOUR_CLOUD_NAME';
   const presetSet = () => CONFIG.UPLOAD_PRESET && CONFIG.UPLOAD_PRESET !== 'YOUR_UNSIGNED_PRESET';
   const baseUrl = () => location.href.split('#')[0].split('?')[0];
+  const validId = id => /^[a-z0-9][a-z0-9_-]{2,63}$/.test(id);
 
   const store = {
     get(k, local) { try { return (local ? localStorage : sessionStorage).getItem(k); } catch (e) { return null; } },
-    set(k, v, local) { try { (local ? localStorage : sessionStorage).setItem(k, v); } catch (e) { /* storage blocked */ } },
-    del(k, local) { try { (local ? localStorage : sessionStorage).removeItem(k); } catch (e) { /* storage blocked */ } }
+    set(k, v, local) { try { (local ? localStorage : sessionStorage).setItem(k, v); } catch (e) {} },
+    del(k, local) { try { (local ? localStorage : sessionStorage).removeItem(k); } catch (e) {} }
   };
 
   const ICONS = {
     download: '<path d="M12 3v12m0 0-4.5-4.5M12 15l4.5-4.5"/><path d="M4 17v2a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2v-2"/>',
     upload: '<path d="M12 16V4m0 0L7.5 8.5M12 4l4.5 4.5"/><path d="M4 17v2a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2v-2"/>',
     close: '<path d="M6 6l12 12M18 6 6 18"/>',
-    grip: '<g fill="currentColor" stroke="none"><circle cx="9" cy="6" r="1.4"/><circle cx="15" cy="6" r="1.4"/><circle cx="9" cy="12" r="1.4"/><circle cx="15" cy="12" r="1.4"/><circle cx="9" cy="18" r="1.4"/><circle cx="15" cy="18" r="1.4"/></g>',
     chevL: '<path d="M15 5l-7 7 7 7"/>',
     chevR: '<path d="M9 5l7 7-7 7"/>',
     lock: '<rect x="4" y="10" width="16" height="10" rx="2"/><path d="M8 10V7a4 4 0 0 1 8 0v3"/>',
+    unlock: '<rect x="4" y="10" width="16" height="10" rx="2"/><path d="M8 10V7a4 4 0 0 1 7.5-2"/>',
     copy: '<rect x="9" y="9" width="11" height="11" rx="2"/><path d="M5 15V6a2 2 0 0 1 2-2h9"/>',
     share: '<path d="M12 15V3m0 0L8 7m4-4 4 4"/><path d="M5 12v7a2 2 0 0 0 2 2h10a2 2 0 0 0 2-2v-7"/>',
     external: '<path d="M14 4h6v6M20 4l-9 9"/><path d="M18 14v5a1 1 0 0 1-1 1H5a1 1 0 0 1-1-1V7a1 1 0 0 1 1-1h5"/>',
     instagram: '<rect x="3" y="3" width="18" height="18" rx="5"/><circle cx="12" cy="12" r="4"/><circle cx="17.2" cy="6.8" r=".8" fill="currentColor"/>',
     mail: '<rect x="3" y="5" width="18" height="14" rx="2"/><path d="m3 7 9 6 9-6"/>',
     whatsapp: '<path d="M3 21l1.6-4.6A8.5 8.5 0 1 1 8 19.6L3 21z"/><path d="M9 9.5c.5 2 2.5 4 5 5l1.3-1.3-1.8-1-.9.7c-.8-.4-1.6-1.2-2-2l.7-.9-1-1.8L9 9.5z"/>',
-    image: '<rect x="3" y="4" width="18" height="16" rx="2"/><circle cx="9" cy="10" r="1.6"/><path d="m4 18 5-5 4 4 3-3 4 4"/>'
+    image: '<rect x="3" y="4" width="18" height="16" rx="2"/><circle cx="9" cy="10" r="1.6"/><path d="m4 18 5-5 4 4 3-3 4 4"/>',
+    file: '<path d="M14 3H7a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h10a2 2 0 0 0 2-2V8l-5-5z"/><path d="M14 3v5h5"/>',
+    star: '<path d="m12 3 2.7 5.6 6.1.9-4.4 4.3 1 6.1L12 17l-5.4 2.9 1-6.1L3.2 9.5l6.1-.9z"/>'
   };
   const svg = (name, cls = 'h-5 w-5') =>
     `<svg class="${cls}" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">${ICONS[name] || ''}</svg>`;
   const hydrateIcons = () => $$('[data-icon]').forEach(n => { n.innerHTML = svg(n.dataset.icon, n.dataset.cls || 'h-5 w-5'); });
 
-  // Small, deterministic string hash (works on http, https and file://). A soft lock, not real security.
   function cyrb53(str, seed = 0) {
     let h1 = 0xdeadbeef ^ seed, h2 = 0x41c6ce57 ^ seed;
     for (let i = 0; i < str.length; i++) {
@@ -659,24 +728,38 @@
     return isNaN(d) ? '' : d.toLocaleDateString('en-ZA', { day: 'numeric', month: 'long', year: 'numeric' });
   }
 
+  const fmtBytes = n => {
+    n = +n || 0;
+    if (n < 1024) return n + ' B';
+    const u = ['KB', 'MB', 'GB'];
+    let i = -1;
+    do { n /= 1024; i++; } while (n >= 1024 && i < 2);
+    return n.toFixed(n < 10 ? 1 : 0) + ' ' + u[i];
+  };
+
   let toastTimer;
   function toast(msg) {
     const t = $('#toast');
     t.textContent = msg;
     show(t, true);
     clearTimeout(toastTimer);
-    toastTimer = setTimeout(() => show(t, false), 2800);
+    toastTimer = setTimeout(() => show(t, false), 3000);
   }
 
   const noIndex = () => { $('#meta-robots').setAttribute('content', 'noindex,nofollow'); };
+  const setMeta = (sel, v) => { const n = $(sel); if (n) n.setAttribute('content', v); };
+  function setOg(title, img) {
+    setMeta('meta[property="og:title"]', title);
+    if (img) { setMeta('meta[property="og:image"]', img); setMeta('meta[name="twitter:image"]', img); }
+  }
 
   function syncLock() {
-    const open = ['#lightbox', '#zip-modal', '#pin-overlay'].some(s => !$(s).classList.contains('is-hidden'));
+    const open = ['#lightbox', '#zip-modal', '#pin-overlay', '#g-welcome', '#crop-modal'].some(s => !$(s).classList.contains('is-hidden'));
     document.documentElement.classList.toggle('lock', open);
   }
 
   async function copyText(text) {
-    try { await navigator.clipboard.writeText(text); return true; } catch (e) { /* fall back */ }
+    try { await navigator.clipboard.writeText(text); return true; } catch (e) {}
     const t = document.createElement('textarea');
     t.value = text; t.setAttribute('readonly', '');
     t.style.cssText = 'position:fixed;opacity:0;top:0;left:0';
@@ -698,25 +781,27 @@
     });
   }
 
-  /* ==========================================================
-     Cloudinary data layer
-     Photos are found by TAG using Cloudinary's public list endpoint:
-       https://res.cloudinary.com/<cloud>/image/list/<tag>.json
-     (turn it on: Settings > Security > uncheck "Resource list" under Restricted image types)
-     ========================================================== */
+  const rvIO = ('IntersectionObserver' in window)
+    ? new IntersectionObserver(es => es.forEach(e => { if (e.isIntersecting) { e.target.classList.add('in'); rvIO.unobserve(e.target); } }), { threshold: .1, rootMargin: '0px 0px -5% 0px' })
+    : null;
+  const watch = (root = document) => $$('.rv:not(.in), .clip:not(.in)', root).forEach(n => { if (rvIO) rvIO.observe(n); else n.classList.add('in'); });
+
   const encPath = id => id.split('/').map(encodeURIComponent).join('/');
   const cld = (r, t) =>
     `https://res.cloudinary.com/${CONFIG.CLOUD_NAME}/image/upload/${t ? t + '/' : ''}v${r.version}/${encPath(r.public_id)}.${r.format}`;
+  const thumbAt = (it, w) => it.r ? cld(it.r, `c_limit,w_${w},q_auto,f_auto`) : it.thumb;
 
   function normalize(r, i, slug) {
-    const name = `${(slug || 'photo').replace(/[^a-z0-9]+/gi, '_')}_${String(i + 1).padStart(3, '0')}`;
+    const base = `${(slug || 'photo').replace(/[^a-z0-9]+/gi, '_')}_${String(i + 1).padStart(3, '0')}`;
     return {
       id: r.public_id,
       w: r.width || 4,
       h: r.height || 3,
+      r: { version: r.version, public_id: r.public_id, format: r.format },
       thumb: cld(r, 'c_limit,w_900,q_auto,f_auto'),
       large: cld(r, 'c_limit,w_2000,q_auto,f_auto'),
-      download: cld(r, `fl_attachment:${name}`),   // original file, forced download
+      download: cld(r, `fl_attachment:${base}`),
+      fname: `${base}.${r.format}`,
       external: false
     };
   }
@@ -730,11 +815,11 @@
       const id = ids[(off + i) % ids.length];
       const [w, h] = dims[(i * 7 + off) % dims.length];
       return {
-        id: 'demo-' + seed + i,
-        w, h,
+        id: 'demo-' + seed + i, w, h,
         thumb: `https://picsum.photos/id/${id}/${w}/${h}`,
         large: `https://picsum.photos/id/${id}/${w * 2}/${h * 2}`,
         download: `https://picsum.photos/id/${id}/${w * 2}/${h * 2}`,
+        fname: `photo_${String(i + 1).padStart(3, '0')}.jpg`,
         external: true
       };
     });
@@ -743,34 +828,12 @@
   async function loadItems(tag, { slug, newest = false } = {}) {
     if (isDemo()) { await sleep(450); return demoItems(tag); }
     const res = await fetch(`https://res.cloudinary.com/${CONFIG.CLOUD_NAME}/image/list/${encodeURIComponent(tag)}.json`);
-    if (res.status === 404) return [];            // empty tag, or list endpoint not enabled
+    if (res.status === 404) return [];
     if (!res.ok) { const e = new Error('HTTP ' + res.status); e.status = res.status; throw e; }
     const data = await res.json();
     const list = (data.resources || []).slice().sort((a, b) => new Date(a.created_at) - new Date(b.created_at));
     if (newest) list.reverse();
     return list.map((r, i) => normalize(r, i, slug));
-  }
-
-  /* ==========================================================
-     Layout manifest (order + templates + hidden shots)
-     "Publish live" uploads tiny images tagged ovl2-<tag>. The sequence is encoded in their public IDs, which Cloudinary's public list always returns.
-     Templates: s = 1x1, h = 2x2 hero, w = wide banner, t = tall portrait, c = custom spans, x = hidden
-     ========================================================== */
-  const SEC = CONFIG.SECTIONS;
-  const TPL = { s: '1\u00d71', h: '2\u00d72', w: 'Wide', t: 'Tall' };
-  const heroIO = ('IntersectionObserver' in window)
-    ? new IntersectionObserver(es => es.forEach(e => { if (e.isIntersecting) { e.target.classList.add('in'); heroIO.unobserve(e.target); } }), { threshold: .2 })
-    : null;
-
-  function autoTpl(items) {
-    let n = 0;
-    return items.map((it, i) => {
-      const r = it.w / it.h;
-      if (i === 0) return 'h';
-      if (r > 1.45) return 'w';
-      if (r < .85 && n++ % 2 === 0) return 't';
-      return 's';
-    });
   }
 
   async function loadMany(tags, newest) {
@@ -779,33 +842,23 @@
     return lists.flat().filter(it => !seen.has(it.id) && seen.add(it.id));
   }
 
-  const clampN = (v, a, b) => Math.min(b, Math.max(a, Math.round(+v) || a));
-  const spans = it => it.t === 'c' ? { cs: clampN(it.cs, 1, 4), rs: clampN(it.rs, 1, 4) }
-    : ({ s: { cs: 1, rs: 1 }, h: { cs: 2, rs: 2 }, w: { cs: 2, rs: 1 }, t: { cs: 1, rs: 2 } })[it.t] || { cs: 1, rs: 1 };
-  const entry = it => ({
-    id: it.id, t: it.hide ? 'x' : it.t,
-    cs: it.t === 'c' ? clampN(it.cs, 1, 4) : 0, rs: it.t === 'c' ? clampN(it.rs, 1, 4) : 0,
-    fx: clampN(it.fx == null ? 50 : it.fx, 0, 100), fy: clampN(it.fy == null ? 50 : it.fy, 0, 100)
-  });
-  const ser = es => es.map(e => [e.id, e.t, e.cs, e.rs, e.fx, e.fy].join('|')).join(';');
-  const parseLayout = str => String(str || '').split(';').filter(Boolean).map(p => {
-    const f = p.split('|');
-    return { id: f[0], t: f[1] || 's', cs: +f[2] || 0, rs: +f[3] || 0, fx: clampN(f[4] == null ? 50 : f[4], 0, 100), fy: clampN(f[5] == null ? 50 : f[5], 0, 100) };
-  }).filter(e => e.id);
+  const SEC = CONFIG.SECTIONS;
   const b64e = x => btoa(unescape(encodeURIComponent(x))).replace(/\+/g, '-').replace(/\//g, '_').replace(/=+$/, '');
   const b64d = x => decodeURIComponent(escape(atob(x.replace(/-/g, '+').replace(/_/g, '/'))));
   const LTAG = t => 'ovl2-' + t;
+  const MTAG = t => 'ovm-' + t;
+  const FTAG = t => 'ovf-' + t;
   const PNG1 = 'data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAADUlEQVR42mP8z8BQDwAEhQGAhKmMIQAAAABJRU5ErkJggg==';
 
-  // Read the newest complete published layout for a tag (null if none).
-  async function loadLayout(tag) {
+  async function readBatch(ltag, pfx) {
     if (isDemo()) return null;
     try {
-      const res = await fetch(`https://res.cloudinary.com/${CONFIG.CLOUD_NAME}/image/list/${encodeURIComponent(LTAG(tag))}.json`, { cache: 'no-store' });
+      const res = await fetch(`https://res.cloudinary.com/${CONFIG.CLOUD_NAME}/image/list/${encodeURIComponent(ltag)}.json`, { cache: 'no-store' });
       if (!res.ok) return null;
+      const re = new RegExp('^' + pfx + '_([0-9a-z]+)_(\\d+)_(\\d+)_(.+)$');
       const batches = {};
       ((await res.json()).resources || []).forEach(r => {
-        const m = /^ovl_([0-9a-z]+)_(\d+)_(\d+)_(.+)$/.exec(r.public_id || '');
+        const m = re.exec(r.public_id || '');
         if (!m) return;
         const b = batches[m[1]] || (batches[m[1]] = { n: +m[3], p: {} });
         b.p[+m[2]] = m[4];
@@ -813,39 +866,88 @@
       const keys = Object.keys(batches).sort((a, b) => parseInt(b, 36) - parseInt(a, 36));
       for (const k of keys) {
         const b = batches[k];
-        if (Object.keys(b.p).length !== b.n) continue;      // partial upload: fall back to the previous batch
-        let str = '';
-        for (let i = 0; i < b.n; i++) str += b.p[i];
-        const lay = parseLayout(b64d(str));
-        if (lay.length) return lay;
+        if (Object.keys(b.p).length !== b.n) continue;
+        let s = '';
+        for (let i = 0; i < b.n; i++) s += b.p[i];
+        try { return b64d(s); } catch (e) { continue; }
       }
       return null;
     } catch (e) { return null; }
   }
 
-  // Publish: every chunk must upload, otherwise visitors keep seeing the previous complete layout.
-  async function publishLayout(tag, items) {
-    const chunks = b64e(ser(items.map(entry))).match(/.{1,190}/g) || [];
+  async function writeBatch(ltag, pfx, str) {
+    const chunks = b64e(str).match(/.{1,190}/g) || [];
     const batch = Date.now().toString(36);
     await Promise.all(chunks.map(async (c, i) => {
       const fd = new FormData();
       fd.append('file', PNG1);
       fd.append('upload_preset', CONFIG.UPLOAD_PRESET);
-      fd.append('tags', LTAG(tag));
-      fd.append('public_id', `ovl_${batch}_${i}_${chunks.length}_${c}`);
+      fd.append('tags', ltag);
+      fd.append('public_id', `${pfx}_${batch}_${i}_${chunks.length}_${c}`);
       const res = await fetch(`https://api.cloudinary.com/v1_1/${CONFIG.CLOUD_NAME}/image/upload`, { method: 'POST', body: fd });
       if (!res.ok) {
         let m = '';
-        try { m = (await res.json()).error.message; } catch (e) { /* no body */ }
+        try { m = (await res.json()).error.message; } catch (e) {}
         throw new Error(m || 'HTTP ' + res.status);
       }
     }));
   }
 
-  // Order + templates + crop from a saved layout. Photos not in it (new uploads) go last with auto templates.
+  const fixCrop = it => {
+    it.cw = clamp(it.cw || 1, .02, 1);
+    it.ch = clamp(it.ch || 1, .02, 1);
+    it.cx = clamp(it.cx || 0, 0, 1 - it.cw);
+    it.cy = clamp(it.cy || 0, 0, 1 - it.ch);
+    it.cs = clampN(it.cs, 1, 6);
+  };
+  const entry = it => [it.id, it.hide ? 'x' : 'v', it.cs, Math.round(it.cx * 1000), Math.round(it.cy * 1000), Math.round(it.cw * 1000), Math.round(it.ch * 1000)].join('|');
+  const ser = items => items.map(entry).join(';');
+  const parseLayout = str => String(str || '').split(';').filter(Boolean).map(p => {
+    const f = p.split('|');
+    if (f.length >= 7) return { id: f[0], hide: f[1] === 'x', cs: clampN(f[2], 1, 6), cx: (+f[3] || 0) / 1000, cy: (+f[4] || 0) / 1000, cw: (+f[5] || 1000) / 1000, ch: (+f[6] || 1000) / 1000 };
+    return { id: f[0], old: true, t: f[1] || 's', cs: +f[2] || 0, rs: +f[3] || 0, fx: clampN(f[4] == null ? 50 : f[4], 0, 100), fy: clampN(f[5] == null ? 50 : f[5], 0, 100) };
+  }).filter(e => e.id);
+
+  const OLD = { s: [1, 1], h: [2, 2], w: [2, 1], t: [1, 2] };
+  function fromOld(it, e) {
+    let cs, rs;
+    if (e.t === 'c') { cs = clampN(e.cs, 1, 4); rs = clampN(e.rs, 1, 4); }
+    else { const o = OLD[e.t] || OLD.s; cs = o[0]; rs = o[1]; }
+    const A = cs / rs, ia = it.w / it.h;
+    it.cw = 1; it.ch = 1;
+    if (ia > A) it.cw = A / ia; else it.ch = ia / A;
+    it.cx = (1 - it.cw) * e.fx / 100;
+    it.cy = (1 - it.ch) * e.fy / 100;
+    it.cs = cs;
+  }
+
+  async function loadLayout(tag) {
+    const s = await readBatch(LTAG(tag), 'ovl');
+    if (!s) return null;
+    const lay = parseLayout(s);
+    return lay.length ? lay : null;
+  }
+  async function loadMeta(tag) {
+    const s = await readBatch(MTAG(tag), 'ovm');
+    if (!s) return null;
+    try { return JSON.parse(s); } catch (e) { return null; }
+  }
+  async function loadFiles(tag) {
+    const s = await readBatch(FTAG(tag), 'ovf');
+    if (!s) return [];
+    try { const l = JSON.parse(s); return Array.isArray(l) ? l : []; } catch (e) { return []; }
+  }
+  const fileUrl = f => `https://res.cloudinary.com/${CONFIG.CLOUD_NAME}/raw/upload/v${f.v}/${encPath(f.p)}`;
+
+  function autoDefaults(items) {
+    items.forEach((it, i) => {
+      it.hide = false; it.cx = 0; it.cy = 0; it.cw = 1; it.ch = 1;
+      it.cs = (i === 0 || it.w / it.h > 1.45) ? 2 : 1;
+    });
+  }
+
   function applyLayout(items, lay, keepHidden) {
-    const auto = autoTpl(items);
-    items.forEach((it, i) => { it.t = auto[i]; it.hide = false; it.cs = 0; it.rs = 0; it.fx = 50; it.fy = 50; });
+    autoDefaults(items);
     if (!lay) return items;
     const map = new Map(items.map(i => [i.id, i]));
     const seen = new Set(), out = [];
@@ -853,24 +955,50 @@
       const it = map.get(e.id);
       if (!it) return;
       seen.add(e.id);
-      it.fx = e.fx; it.fy = e.fy;
-      if (e.t === 'x') { it.hide = true; if (keepHidden) out.push(it); return; }
-      if (TPL[e.t]) it.t = e.t;
-      else if (e.t === 'c') { it.t = 'c'; it.cs = clampN(e.cs, 1, 4); it.rs = clampN(e.rs, 1, 4); }
+      if (e.old) { if (e.t === 'x') it.hide = true; else fromOld(it, e); }
+      else { it.hide = e.hide; it.cs = e.cs; it.cx = e.cx; it.cy = e.cy; it.cw = e.cw; it.ch = e.ch; }
+      fixCrop(it);
+      if (it.hide && !keepHidden) return;
       out.push(it);
     });
     items.forEach(it => { if (!seen.has(it.id)) out.push(it); });
     return out;
   }
 
-  /* ==========================================================
-     Shared UI: grid, skeleton, states, lightbox
-     ========================================================== */
+  function cropCss(it) {
+    const w = Math.max(it.cw, .02), h = Math.max(it.ch, .02);
+    return `position:absolute;max-width:none;object-fit:cover;width:${100 / w}%;height:${100 / h}%;left:${-it.cx / w * 100}%;top:${-it.cy / h * 100}%`;
+  }
+
+  function layoutMag(g) {
+    const items = g._items;
+    if (!items || !g.clientWidth) return;
+    g._w = g.clientWidth;
+    const cs = getComputedStyle(g);
+    const cols = cs.gridTemplateColumns.split(' ').length;
+    const gap = parseFloat(cs.columnGap) || 10;
+    const colW = (g.clientWidth - gap * (cols - 1)) / cols;
+    Array.from(g.children).forEach((fig, i) => {
+      const it = items[i];
+      if (!it) return;
+      const span = Math.min(it.cs, cols);
+      const tw = colW * span + gap * (span - 1);
+      const asp = (it.cw * it.w) / (it.ch * it.h);
+      fig.style.gridColumn = `span ${span}`;
+      fig.style.gridRowEnd = `span ${Math.max(1, Math.round((tw / asp + gap) / 4))}`;
+    });
+  }
+
   function renderSkeleton(container, n = 8) {
-    const t = ['h', 's', 's', 't', 'w', 's', 's', 's'];
+    const sp = [[2, 70], [1, 44], [1, 56], [1, 44], [2, 40], [1, 52], [1, 44], [1, 56]];
+    container._items = null;
+    container.onclick = null;
     container.replaceChildren(...Array.from({ length: n }, (_, i) => {
       const d = document.createElement('div');
-      d.className = `skel card t-${t[i % t.length]}`;
+      const s = sp[i % sp.length];
+      d.className = 'skel card';
+      d.style.gridColumn = 'span ' + s[0];
+      d.style.gridRowEnd = 'span ' + s[1];
       return d;
     }));
   }
@@ -882,7 +1010,7 @@
     ic.className = 'mb-4 flex h-12 w-12 items-center justify-center rounded-full bg-white/5 text-mute';
     ic.innerHTML = svg(icon);
     const h = document.createElement('h2');
-    h.className = 'font-display text-2xl';
+    h.className = 'font-display text-3xl';
     h.textContent = title;
     const p = document.createElement('p');
     p.className = 'mt-2 text-sm text-mute';
@@ -895,9 +1023,8 @@
     const frag = document.createDocumentFragment();
     items.forEach((it, i) => {
       const fig = document.createElement('figure');
-      const sp = spans(it);
-      fig.className = `card t-${it.t || 's'} relative overflow-hidden` + (it.t === 'c' ? ` c-${sp.cs} r-${sp.rs}` : '');
-      if (it.t === 'h' || (it.t === 'c' && sp.cs >= 2 && sp.rs >= 2)) { fig.classList.add('hero-zoom'); if (heroIO) heroIO.observe(fig); else fig.classList.add('in'); }
+      fig.className = 'card rv relative overflow-hidden';
+      fig.style.setProperty('--d', (i % 6) * 70 + 'ms');
 
       const btn = document.createElement('button');
       btn.type = 'button';
@@ -906,14 +1033,14 @@
       btn.setAttribute('aria-label', `View photo ${i + 1} of ${items.length}`);
 
       const img = new Image();
-      img.className = 'ph-img h-full w-full object-cover';
+      img.className = 'ph-img';
+      img.style.cssText = cropCss(it);
       img.alt = `${label} — photo ${i + 1}`;
       img.loading = 'lazy';
       img.decoding = 'async';
-      img.style.objectPosition = `${it.fx == null ? 50 : it.fx}% ${it.fy == null ? 50 : it.fy}%`;
       img.addEventListener('load', () => img.classList.add('loaded'));
       img.addEventListener('error', () => fig.classList.add('broken'));
-      img.src = it.thumb;
+      img.src = thumbAt(it, clamp(Math.round(900 / Math.max(it.cw, .3)), 900, 2400));
       if (img.complete && img.naturalWidth) img.classList.add('loaded');
       btn.appendChild(img);
       fig.appendChild(btn);
@@ -937,13 +1064,19 @@
       frag.appendChild(fig);
     });
     container.replaceChildren(frag);
+    container._items = items;
+    layoutMag(container);
+    if (!container._ro && window.ResizeObserver) {
+      container._ro = new ResizeObserver(() => { if (container.clientWidth !== container._w) layoutMag(container); });
+      container._ro.observe(container);
+    }
+    watch(container);
     container.onclick = e => {
       const b = e.target.closest('button[data-index]');
       if (b) openLB(items, +b.dataset.index, withDownload);
     };
   }
 
-  /* ---- Lightbox ---- */
   const LB = { items: [], i: 0, dl: false };
   function openLB(items, i, dl) {
     LB.items = items; LB.i = i; LB.dl = dl;
@@ -979,35 +1112,49 @@
       a.href = it.download;
       if (it.external) a.target = '_blank'; else a.removeAttribute('target');
     }
-    [1, -1].forEach(d => {                      // warm the cache for neighbours
+    [1, -1].forEach(d => {
       const nb = LB.items[(LB.i + d + LB.items.length) % LB.items.length];
       if (nb && nb !== it) new Image().src = nb.large;
     });
   }
 
-  /* ---- Bulk download modal ---- */
-  const Z = { items: [], running: false, cancel: false, done: 0 };
+  const Z = { items: [], running: '', cancel: false, done: 0, msg: '', name: 'gallery' };
 
   function paintZip() {
-    const n = Z.items.length;
-    $('#zip-run-label').textContent = Z.running ? `Stop (${Z.done} / ${n})` : `Download all photos (${n})`;
-    show($('#zip-progress'), Z.running || Z.done > 0);
+    const n = Z.items.length, run = Z.running;
+    $('#zip-run-zip-label').textContent = run === 'zip' ? `Stop (${Z.done} / ${n})` : 'Download as one ZIP';
+    $('#zip-run-label').textContent = run === 'one' ? `Stop (${Z.done} / ${n})` : `Download one by one (${n})`;
+    $('#zip-run-zip').disabled = run === 'one';
+    $('#zip-run').disabled = run === 'zip';
+    show($('#zip-progress'), !!run || Z.done > 0);
     $('#zip-bar').style.width = n ? `${Math.round((Z.done / n) * 100)}%` : '0%';
-    $('#zip-status').textContent = Z.running
-      ? `Saving photo ${Z.done} of ${n}…`
-      : Z.done >= n && n
-        ? 'All downloads started. Check your Downloads folder.'
-        : Z.done ? `Stopped at ${Z.done} of ${n}.` : '';
+    $('#zip-status').textContent = Z.msg;
   }
-  function openZip(items) {
-    Z.items = items;
+  function openZip(items, name) {
+    Z.items = items; Z.name = name || 'gallery'; Z.done = 0; Z.msg = ''; Z.running = ''; Z.cancel = false;
     paintZip();
     show($('#zip-modal'), true);
     syncLock();
-    $('#zip-run').focus();
+    $('#zip-run-zip').focus();
   }
-  function closeZip() { show($('#zip-modal'), false); syncLock(); }
+  function closeZip() { if (Z.running) Z.cancel = true; show($('#zip-modal'), false); syncLock(); }
 
+  async function fetchBlob(url, ms = 90000) {
+    const ctl = new AbortController();
+    const t = setTimeout(() => ctl.abort(), ms);
+    try {
+      const r = await fetch(url, { signal: ctl.signal });
+      if (!r.ok) throw new Error('HTTP ' + r.status);
+      return await r.blob();
+    } finally { clearTimeout(t); }
+  }
+  function saveBlob(blob, name) {
+    const u = URL.createObjectURL(blob);
+    const a = document.createElement('a');
+    a.href = u; a.download = name; a.style.display = 'none';
+    document.body.appendChild(a); a.click(); a.remove();
+    setTimeout(() => URL.revokeObjectURL(u), 60000);
+  }
   function triggerDownload(it) {
     const a = document.createElement('a');
     a.href = it.download;
@@ -1019,18 +1166,83 @@
     a.click();
     a.remove();
   }
+
   async function runBulk() {
-    if (Z.running) { Z.cancel = true; return; }
-    Z.running = true; Z.cancel = false; Z.done = 0;
+    if (Z.running === 'one') { Z.cancel = true; return; }
+    Z.running = 'one'; Z.cancel = false; Z.done = 0; Z.msg = 'Starting…';
     paintZip();
+    let failed = 0;
     for (const it of Z.items) {
       if (Z.cancel) break;
-      triggerDownload(it);
+      Z.msg = `Saving photo ${Z.done + 1} of ${Z.items.length}…`;
+      paintZip();
+      try { saveBlob(await fetchBlob(it.download), it.fname); }
+      catch (e) { failed++; triggerDownload(it); }
       Z.done++;
       paintZip();
       await sleep(CONFIG.BULK_DELAY_MS);
     }
-    Z.running = false; Z.cancel = false;
+    Z.msg = Z.cancel ? `Stopped at ${Z.done} of ${Z.items.length}.` : `All ${Z.items.length} downloads started. Check your Downloads folder.${failed ? ` (${failed} used a fallback.)` : ''}`;
+    Z.running = ''; Z.cancel = false;
+    paintZip();
+  }
+
+  const CRC = (() => {
+    const t = new Uint32Array(256);
+    for (let n = 0; n < 256; n++) { let c = n; for (let k = 0; k < 8; k++) c = c & 1 ? 0xEDB88320 ^ (c >>> 1) : c >>> 1; t[n] = c >>> 0; }
+    return t;
+  })();
+  const crc32 = u8 => { let c = 0xFFFFFFFF; for (let i = 0; i < u8.length; i++) c = CRC[(c ^ u8[i]) & 255] ^ (c >>> 8); return (c ^ 0xFFFFFFFF) >>> 0; };
+
+  async function buildZip(items, onProgress, cancelled) {
+    const enc = new TextEncoder();
+    const now = new Date();
+    const time = (now.getHours() << 11) | (now.getMinutes() << 5) | (now.getSeconds() >> 1);
+    const date = ((now.getFullYear() - 1980) << 9) | ((now.getMonth() + 1) << 5) | now.getDate();
+    const parts = [], central = [];
+    let off = 0;
+    for (let i = 0; i < items.length; i++) {
+      if (cancelled()) return null;
+      const blob = await fetchBlob(items[i].download);
+      const crc = crc32(new Uint8Array(await blob.arrayBuffer()));
+      const name = enc.encode(items[i].fname);
+      const size = blob.size;
+      const lh = new DataView(new ArrayBuffer(30 + name.length));
+      lh.setUint32(0, 0x04034b50, true); lh.setUint16(4, 20, true); lh.setUint16(6, 0x0800, true); lh.setUint16(8, 0, true);
+      lh.setUint16(10, time, true); lh.setUint16(12, date, true); lh.setUint32(14, crc, true);
+      lh.setUint32(18, size, true); lh.setUint32(22, size, true); lh.setUint16(26, name.length, true); lh.setUint16(28, 0, true);
+      new Uint8Array(lh.buffer).set(name, 30);
+      const ch = new DataView(new ArrayBuffer(46 + name.length));
+      ch.setUint32(0, 0x02014b50, true); ch.setUint16(4, 20, true); ch.setUint16(6, 20, true); ch.setUint16(8, 0x0800, true); ch.setUint16(10, 0, true);
+      ch.setUint16(12, time, true); ch.setUint16(14, date, true); ch.setUint32(16, crc, true);
+      ch.setUint32(20, size, true); ch.setUint32(24, size, true); ch.setUint16(28, name.length, true);
+      ch.setUint32(42, off, true);
+      new Uint8Array(ch.buffer).set(name, 46);
+      parts.push(lh.buffer, blob);
+      central.push(ch.buffer);
+      off += 30 + name.length + size;
+      onProgress(i + 1);
+    }
+    const cdSize = central.reduce((s, b) => s + b.byteLength, 0);
+    const end = new DataView(new ArrayBuffer(22));
+    end.setUint32(0, 0x06054b50, true); end.setUint16(8, items.length, true); end.setUint16(10, items.length, true);
+    end.setUint32(12, cdSize, true); end.setUint32(16, off, true);
+    return new Blob([...parts, ...central, end.buffer], { type: 'application/zip' });
+  }
+
+  async function runZip() {
+    if (Z.running === 'zip') { Z.cancel = true; return; }
+    Z.running = 'zip'; Z.cancel = false; Z.done = 0; Z.msg = 'Preparing…';
+    paintZip();
+    try {
+      const blob = await buildZip(Z.items, n => { Z.done = n; Z.msg = `Packing photo ${n} of ${Z.items.length}…`; paintZip(); }, () => Z.cancel);
+      if (blob) { saveBlob(blob, `${Z.name}.zip`); Z.msg = 'Your ZIP is ready. Check your Downloads folder.'; }
+      else Z.msg = `Stopped at ${Z.done} of ${Z.items.length}.`;
+    } catch (e) {
+      console.warn('[zip]', e);
+      Z.msg = 'Couldn\u2019t build the ZIP on this device. Try \u201CDownload one by one\u201D.';
+    }
+    Z.running = ''; Z.cancel = false;
     paintZip();
   }
 
@@ -1056,6 +1268,7 @@
     $('#zip-close').addEventListener('click', closeZip);
     $('#zip-modal').addEventListener('click', e => { if (e.target === e.currentTarget) closeZip(); });
     $('#zip-run').addEventListener('click', runBulk);
+    $('#zip-run-zip').addEventListener('click', runZip);
 
     document.addEventListener('keydown', e => {
       if (!$('#lightbox').classList.contains('is-hidden')) {
@@ -1068,9 +1281,6 @@
     });
   }
 
-  /* ==========================================================
-     VIEW 1 — Public portfolio (single page)
-     ========================================================== */
   const waLink = msg => `https://wa.me/${String((CONFIG.CONTACT || {}).whatsapp || '').replace(/\D/g, '')}?text=${encodeURIComponent(msg)}`;
   const LOGO_TAG = 'site-logo';
   let homeItems = [], homeFilter = 'all';
@@ -1089,7 +1299,7 @@
       if (!res.ok) return;
       const list = ((await res.json()).resources || []).sort((x, y) => new Date(y.created_at) - new Date(x.created_at));
       if (list[0]) applyLogo(cld(list[0], 'c_limit,h_200,q_auto,f_auto'));
-    } catch (e) { /* no logo */ }
+    } catch (e) {}
   }
 
   function paintContact() {
@@ -1097,14 +1307,13 @@
     $('#c-bio').textContent = CONFIG.BIO;
     const box = $('#c-links');
     box.replaceChildren();
-    [[c.whatsapp && waLink('Hi Ompha Visuals!'), 'whatsapp', 'WhatsApp', '#758548', '#FBF8F3', true],
-     [c.email && `mailto:${c.email}`, 'mail', 'Email', '#4a3f35', '#FBF8F3', false],
-     [c.instagram, 'instagram', 'Instagram', '#B5A68C', '#2b2418', true]].forEach(([href, icon, label, bg, fg, ext]) => {
+    [[c.whatsapp && waLink('Hi Ompha Visuals!'), 'whatsapp', 'WhatsApp', 'pill-d', true],
+     [c.email && `mailto:${c.email}`, 'mail', 'Email', 'pill-o', false],
+     [c.instagram, 'instagram', 'Instagram', 'pill-o', true]].forEach(([href, icon, label, cls, ext]) => {
       if (!href) return;
       const a = document.createElement('a');
       a.href = href;
-      a.className = 'pill pill-sm';
-      a.style.cssText = `background:${bg};color:${fg}`;
+      a.className = 'pill pill-sm ' + cls;
       if (ext) { a.target = '_blank'; a.rel = 'noopener'; }
       a.innerHTML = svg(icon, 'h-[18px] w-[18px]');
       const t = document.createElement('span');
@@ -1115,17 +1324,17 @@
     $('#c-pkgs').replaceChildren(...CONFIG.PACKAGES.map((p, i) => {
       const f = i === 1;
       const card = document.createElement('article');
-      card.className = 'flex flex-col rounded-2xl p-6';
-      card.style.cssText = f ? 'background:#4a3f35;color:#FBF8F3' : 'background:#FFFEF9;border:1px solid rgba(181,166,140,.55)';
-      card.innerHTML = '<p class="eyebrow"></p><h3 class="mt-2 font-display text-3xl font-medium"></h3><p class="mt-4 font-display text-5xl font-semibold"></p><p class="mt-3 text-sm opacity-75"></p><div class="mt-auto pt-6"><a class="pill pill-sm w-full" target="_blank" rel="noopener">Book now</a></div>';
+      card.className = 'pkg rv' + (f ? ' f' : '');
+      card.style.setProperty('--d', i * 120 + 'ms');
+      card.innerHTML = '<p class="eyebrow"></p><h3 class="font-display mt-3 text-4xl"></h3><p class="font-display mt-5 text-6xl"></p><p class="mt-4 text-sm opacity-75"></p><div class="mt-auto pt-7"><a class="pill pill-sm w-full" target="_blank" rel="noopener">Book now</a></div>';
       card.children[0].textContent = f ? 'Most loved' : 'Package';
-      card.children[0].style.color = f ? '#c9a77c' : '#8a7c64';
+      card.children[0].style.color = f ? '#c9b28a' : '';
       card.children[1].textContent = p.name;
       card.children[2].textContent = `R${p.price}`;
       card.children[3].textContent = p.blurb;
       const a = card.querySelector('a');
       a.href = waLink(`Hi Ompha Visuals! I'd like to book the ${p.name} package (R${p.price}). Please let me know your availability.`);
-      a.style.cssText = f ? 'background:#a67c52;color:#FBF8F3' : 'border:1.5px solid #4a3f35;color:#4a3f35';
+      a.classList.add(f ? 'pill-w' : 'pill-o');
       return card;
     }));
   }
@@ -1186,6 +1395,7 @@
 
   function initPortfolio() {
     document.documentElement.classList.add('lt');
+    setMeta('#meta-theme', '#f6f5f2');
     show($('#view-portfolio'), true);
     show($('#demo-note'), isDemo());
     $('#yr').textContent = new Date().getFullYear();
@@ -1195,16 +1405,30 @@
     paintChips();
     loadLogo();
     loadHome();
+    watch();
+
+    const curtain = $('#curtain');
+    show(curtain, true);
+    setTimeout(() => curtain.classList.add('out'), 900);
+    setTimeout(() => show(curtain, false), 2100);
+
+    const head = $('#p-head');
+    const onScroll = () => head.classList.toggle('scrolled', window.scrollY > 24);
+    window.addEventListener('scroll', onScroll, { passive: true });
+    onScroll();
 
     $('#g-form').addEventListener('submit', e => {
       e.preventDefault();
-      const id = $('#g-id').value.trim(), pin = $('#g-pin').value.replace(/\D/g, ''), err = $('#g-err');
-      if (!/^[A-Za-z0-9_-]{1,64}$/.test(id)) { err.textContent = 'Please enter your gallery ID.'; return; }
+      const v = $('#g-id').value.trim(), err = $('#g-err'), p = new URLSearchParams();
+      try {
+        const u = new URL(v, location.href);
+        if (u.searchParams.get('gallery')) ['gallery', 't', 'd', 'p'].forEach(k => { const x = u.searchParams.get(k); if (x) p.set(k, x); });
+      } catch (x) {}
+      if (!p.has('gallery')) p.set('gallery', v);
+      if (!/^[A-Za-z0-9_-]{1,64}$/.test(p.get('gallery'))) { err.textContent = 'Please enter your gallery ID or link.'; return; }
       err.textContent = '';
-      const p = new URLSearchParams();
-      p.set('gallery', id);
-      if (pin) p.set('p', pinHash(id, pin));
-      location.href = `${baseUrl()}?${p.toString()}`;
+      document.body.classList.add('leaving');
+      setTimeout(() => { location.href = `${baseUrl()}?${p.toString()}`; }, 450);
     });
 
     $('#c-form').addEventListener('submit', e => {
@@ -1215,13 +1439,10 @@
     });
   }
 
-  
-  /* ==========================================================
-     VIEW 2 — Client gallery
-     ========================================================== */
   function askPin(id, title, hash) {
     return new Promise(resolve => {
       $('#pin-title').textContent = title;
+      show($('#g-load'), false);
       show($('#pin-overlay'), true);
       syncLock();
       const form = $('#pin-form'), input = $('#pin-input'), err = $('#pin-err');
@@ -1232,6 +1453,7 @@
         if (pin && pinHash(id, pin) === hash) {
           store.set('ov_g_' + id, hash);
           show($('#pin-overlay'), false);
+          show($('#g-load'), true);
           syncLock();
           resolve();
         } else {
@@ -1246,57 +1468,73 @@
     });
   }
 
-  function contactHref(title) {
-    const c = CONFIG.CONTACT || {};
-    const msg = `Hi! Could you send me a ZIP of my gallery: ${title}`;
-    if (c.whatsapp) return `https://wa.me/${String(c.whatsapp).replace(/\D/g, '')}?text=${encodeURIComponent(msg)}`;
-    if (c.email) return `mailto:${c.email}?subject=${encodeURIComponent('ZIP request — ' + title)}&body=${encodeURIComponent(msg)}`;
-    return '';
+  function paintGalleryFiles(list) {
+    const ul = $('#g-files-list');
+    ul.replaceChildren(...list.map(f => {
+      const li = document.createElement('li');
+      li.className = 'flex items-center gap-3 px-4 py-3';
+      li.innerHTML = `<span class="flex h-10 w-10 shrink-0 items-center justify-center rounded-full bg-white/5">${svg('file')}</span><div class="min-w-0 flex-1"><p class="truncate text-sm"></p><p class="text-xs text-mute"></p></div><a class="glass tap inline-flex shrink-0 items-center justify-center gap-2 rounded-full px-4 text-sm" target="_blank" rel="noopener" download>${svg('download', 'h-[18px] w-[18px]')}<span>Download</span></a>`;
+      const ps = li.querySelectorAll('p');
+      ps[0].textContent = f.n;
+      ps[1].textContent = fmtBytes(f.b);
+      li.querySelector('a').href = fileUrl(f);
+      return li;
+    }));
+    show($('#g-files'), list.length > 0);
   }
 
   async function initGallery(q) {
     noIndex();
+    setMeta('#meta-theme', '#0a0a0a');
     loadLogo();
     show($('#view-gallery'), true);
 
     const id = (q.get('gallery') || '').trim();
-    const title = (q.get('t') || '').trim().slice(0, 120) || 'Your gallery';
-    const dateTxt = fmtDate(q.get('d') || '');
-    const hash = q.get('p') || '';
     const grid = $('#gallery-grid'), state = $('#gallery-state');
 
+    if (!/^[A-Za-z0-9_-]{1,64}$/.test(id)) {
+      show($('#g-load'), false);
+      show($('#g-main'), true);
+      showState(state, 'This link looks incomplete', 'Please use the full link or ID you were sent, or contact the photographer.', 'lock');
+      return;
+    }
+
+    const meta = await loadMeta(id);
+    const title = ((meta && meta.t) || q.get('t') || '').trim().slice(0, 120) || 'Your gallery';
+    const dateTxt = fmtDate((meta && meta.d) || q.get('d') || '');
+    const hash = meta ? (meta.p || '') : (q.get('p') || '');
+
     document.title = `${title} — ${CONFIG.BRAND}`;
+    setOg(title, '');
     $('#g-title').textContent = title;
     $('#g-bar-title').textContent = title;
     $('#g-date').textContent = dateTxt;
     show($('#g-date'), !!dateTxt);
 
-    if (!/^[A-Za-z0-9_-]{1,64}$/.test(id)) {
-      showState(state, 'This link looks incomplete', 'Please use the full link you were sent, or contact the photographer.', 'lock');
-      return;
-    }
-
     if (hash && store.get('ov_g_' + id) !== hash) await askPin(id, title, hash);
 
-    renderSkeleton(grid, 8);
-    let items;
+    let items, files = [];
     try {
-      items = await loadItems(id, { slug: slugify(title) || id });
-      items = applyLayout(items, await loadLayout(id));
+      const [raw, lay, fl] = await Promise.all([loadItems(id, { slug: slugify(title) || id }), loadLayout(id), loadFiles(id)]);
+      items = applyLayout(raw, lay);
+      files = fl;
     } catch (err) {
       console.warn('[gallery] could not load photos:', err);
-      grid.replaceChildren();
+      show($('#g-load'), false);
+      show($('#g-main'), true);
       showState(state, 'This gallery couldn\u2019t load', 'Please check your connection and refresh the page.');
       return;
     }
 
+    show($('#g-load'), false);
+    if (files.length) paintGalleryFiles(files);
+
     if (!items.length) {
-      grid.replaceChildren();
-      showState(state, 'No photos here yet', 'Your photos may still be uploading. Please check back shortly, or contact the photographer if this seems wrong.');
+      show($('#g-main'), true);
+      if (!files.length) showState(state, 'No photos here yet', 'Your photos may still be uploading. Please check back shortly, or contact the photographer if this seems wrong.');
       return;
     }
 
-    state.replaceChildren();
     renderGrid(grid, items, { withDownload: true, label: title });
 
     const countTxt = `${items.length} photo${items.length === 1 ? '' : 's'}`;
@@ -1306,29 +1544,34 @@
     show($('#g-zip-top'), true);
     show($('#g-bottombar'), true);
 
-    const href = contactHref(title);
-    const contact = $('#zip-contact');
-    show($('#zip-contact-wrap'), !!href);
-    if (href) contact.href = href;
-
-    const ep = $('#zip-endpoint');
-    if (CONFIG.ZIP_ENDPOINT) {
-      ep.href = `${CONFIG.ZIP_ENDPOINT}${CONFIG.ZIP_ENDPOINT.includes('?') ? '&' : '?'}tag=${encodeURIComponent(id)}`;
-      show(ep, true);
-    }
-
-    const open = () => openZip(items);
+    const open = () => openZip(items, slugify(title) || id);
     $('#g-zip-top').addEventListener('click', open);
     $('#g-zip-bottom').addEventListener('click', open);
+
+    const cov = (meta && meta.c && items.find(x => x.id === meta.c)) || items[0];
+    const wi = $('#wl-img');
+    wi.onload = () => wi.classList.add('loaded');
+    wi.src = thumbAt(cov, 1600);
+    setOg(title, cov.r ? cld(cov.r, 'c_fill,w_1200,h_630,q_auto,f_jpg') : cov.large);
+    $('#wl-title').textContent = title;
+    $('#wl-meta').textContent = [dateTxt, countTxt].filter(Boolean).join('  \u00b7  ');
+    show($('#g-welcome'), true);
+    syncLock();
+
+    $('#wl-go').addEventListener('click', () => {
+      const w = $('#g-welcome');
+      show($('#g-main'), true);
+      window.scrollTo(0, 0);
+      w.classList.add('leave');
+      setTimeout(() => { show(w, false); syncLock(); watch(); }, 1300);
+    });
   }
 
-  /* ==========================================================
-     VIEW 3 — Admin dashboard
-     ========================================================== */
-  const A = { mode: 'client', title: '', date: '', pin: '', rand: rand(5), id: '', idManual: false, uploaded: 0, locked: false };
+  const A = { mode: 'client', title: '', date: '', pin: '', ph: '', rand: rand(5), id: '', idManual: false, uploaded: 0, locked: false, metaSent: '' };
   let adminBound = false;
   const RECENT_KEY = 'ov_recent';
 
+  const curPh = () => A.pin ? pinHash(A.id, A.pin) : A.ph;
   const deriveId = () => `${slugify(A.title) || 'client'}-${A.rand}`;
   function syncId() {
     if (!A.idManual && !A.locked) A.id = deriveId();
@@ -1340,10 +1583,21 @@
     if (A.mode !== 'client') return baseUrl() + '#' + A.mode;
     const p = new URLSearchParams();
     p.set('gallery', A.id);
-    if (A.title.trim()) p.set('t', A.title.trim());
-    if (A.date) p.set('d', A.date);
-    if (A.pin) p.set('p', pinHash(A.id, A.pin));
+    if (isDemo() || !presetSet()) {
+      if (A.title.trim()) p.set('t', A.title.trim());
+      if (A.date) p.set('d', A.date);
+      if (curPh()) p.set('p', curPh());
+    }
     return `${baseUrl()}?${p.toString()}`;
+  }
+
+  async function publishMeta() {
+    if (A.mode !== 'client' || isDemo() || !presetSet() || !validId(A.id)) return;
+    const cover = S.tag === A.id ? S.cover : '';
+    const payload = JSON.stringify({ t: A.title.trim(), d: A.date, p: curPh(), c: cover });
+    if (payload === A.metaSent) return;
+    await writeBatch(MTAG(A.id), 'ovm', payload);
+    A.metaSent = payload;
   }
 
   function paintAdmin() {
@@ -1355,9 +1609,11 @@
     const client = A.mode === 'client';
     show($('#card-details'), client);
     show($('#card-link'), client);
+    show($('#card-files'), client);
     show($('#portfolio-note'), !client);
     const link = buildLink();
     $('#link-out').value = link;
+    $('#id-out').value = A.id;
     $('#btn-open').href = link;
     $('#upload-status').textContent = A.uploaded
       ? `${A.uploaded} photo${A.uploaded === 1 ? '' : 's'} uploaded this session.`
@@ -1365,6 +1621,8 @@
     $('#id-note').textContent = A.locked ? 'ID is locked because photos were uploaded. Tap \u201CNew gallery\u201D to start another.' : '';
     $('#f-id').disabled = A.locked;
     $('#btn-newid').disabled = A.locked;
+    show($('#nopin'), !!A.ph && !A.pin);
+    $('#f-pin').placeholder = A.ph && !A.pin ? 'A PIN is set — type to change' : '4–8 digits';
   }
 
   function paintRecent() {
@@ -1428,12 +1686,21 @@
     if (CONFIG.ADMIN_PIN === '2580') add('You\u2019re still using the default admin PIN. Change ADMIN_PIN in the script.');
   }
 
+  const WIDGET_STYLES = {
+    palette: {
+      window: '#141414', sourceBg: '#0f0f0f', windowBorder: '#3a3a3a',
+      tabIcon: '#ffffff', inactiveTabIcon: '#8a8a8a', menuIcons: '#cfcfcf',
+      link: '#d9d9d9', action: '#4a4a4a', inProgress: '#bdbdbd',
+      complete: '#7ddc9a', error: '#ff6b6b', textDark: '#0a0a0a', textLight: '#ffffff'
+    }
+  };
+
   function openUploadWidget() {
     if (isDemo() || !presetSet()) { toast('Add your Cloudinary cloud name and upload preset first'); return; }
     if (!window.cloudinary) { toast('Uploader is still loading — try again in a moment'); return; }
     let tag = (SEC[A.mode] || {}).tag || CONFIG.PORTFOLIO_TAG;
     if (A.mode === 'client') {
-      if (!/^[a-z0-9][a-z0-9_-]{2,63}$/.test(A.id)) { toast('Gallery ID needs 3+ characters: a–z, 0–9, dashes'); return; }
+      if (!validId(A.id)) { toast('Gallery ID needs 3+ characters: a–z, 0–9, dashes'); return; }
       tag = A.id;
     }
     const widget = cloudinary.createUploadWidget({
@@ -1448,15 +1715,8 @@
       cropping: false,
       showAdvancedOptions: false,
       showUploadMoreButton: true,
-      styles: {
-        palette: {
-          window: '#1a1a1a', sourceBg: '#141414', windowBorder: '#3a3a3a',
-          tabIcon: '#ffffff', inactiveTabIcon: '#8a8a8a', menuIcons: '#cfcfcf',
-          link: '#d9d9d9', action: '#4a4a4a', inProgress: '#bdbdbd',
-          complete: '#7ddc9a', error: '#ff6b6b', textDark: '#0d0d0d', textLight: '#ffffff'
-        }
-      }
-    }, (error, result) => {
+      styles: WIDGET_STYLES
+    }, async (error, result) => {
       if (error) { console.error('[upload]', error); toast('Upload problem — run the Setup check below'); return; }
       if (!result) return;
       if (result.event === 'success') {
@@ -1464,23 +1724,99 @@
         if (A.mode === 'client') A.locked = true;
         paintAdmin();
       } else if (result.event === 'queues-end' && A.uploaded) {
-        toast('Upload complete'); stLoad(true);
+        toast('Upload complete');
+        await stLoad(true);
+        try { await publishMeta(); } catch (e) {}
         saveRecent();
       }
     });
     widget.open();
   }
 
+  const F = { tag: '', items: [] };
+
+  function paintFileList() {
+    const ul = $('#fl-list');
+    ul.replaceChildren();
+    $('#fl-status').textContent = F.items.length
+      ? `${F.items.length} file${F.items.length === 1 ? '' : 's'} shown to the client in a separate section.`
+      : 'ZIPs and other files shown to the client in a separate section. The section only appears once a file is uploaded.';
+    F.items.forEach((f, i) => {
+      const li = document.createElement('li');
+      li.className = 'flex items-center gap-2 py-3';
+      li.innerHTML = '<div class="min-w-0 flex-1"><p class="truncate text-sm"></p><p class="text-xs text-mute"></p></div><button type="button" class="glass tap inline-flex items-center justify-center rounded-xl" aria-label="Remove file"></button>';
+      const ps = li.querySelectorAll('p');
+      ps[0].textContent = f.n;
+      ps[1].textContent = fmtBytes(f.b);
+      const b = li.querySelector('button');
+      b.dataset.i = i;
+      b.innerHTML = svg('close', 'h-4 w-4');
+      ul.appendChild(li);
+    });
+  }
+
+  async function flLoad(quiet) {
+    if (A.mode !== 'client' || !validId(A.id)) { if (!quiet) toast('Enter a gallery ID first'); return; }
+    const tag = A.id;
+    const list = await loadFiles(tag);
+    F.tag = tag; F.items = list;
+    paintFileList();
+  }
+
+  async function flPublish() {
+    await writeBatch(FTAG(F.tag), 'ovf', JSON.stringify(F.items));
+    paintFileList();
+  }
+
+  async function openFilesWidget() {
+    if (isDemo() || !presetSet()) { toast('Add your Cloudinary cloud name and upload preset first'); return; }
+    if (!window.cloudinary) { toast('Uploader is still loading — try again in a moment'); return; }
+    if (!validId(A.id)) { toast('Gallery ID needs 3+ characters: a–z, 0–9, dashes'); return; }
+    await flLoad(true);
+    const tag = F.tag;
+    let added = 0;
+    cloudinary.createUploadWidget({
+      cloudName: CONFIG.CLOUD_NAME,
+      uploadPreset: CONFIG.UPLOAD_PRESET,
+      tags: [FTAG(tag)],
+      sources: ['local', 'url'],
+      multiple: true,
+      resourceType: 'raw',
+      maxFileSize: 200000000,
+      cropping: false,
+      showUploadMoreButton: true,
+      styles: WIDGET_STYLES
+    }, async (error, result) => {
+      if (error) { console.error('[files]', error); toast('File upload problem — run the Setup check below'); return; }
+      if (!result) return;
+      if (result.event === 'success') {
+        const i = result.info;
+        const m = /\.([A-Za-z0-9]+)$/.exec(i.public_id || '');
+        const ext = m ? m[1] : (i.format || '');
+        const nm = (i.original_filename || 'file') + (ext && !String(i.original_filename || '').toLowerCase().endsWith('.' + ext.toLowerCase()) ? '.' + ext : '');
+        F.items.push({ p: i.public_id, v: i.version, b: i.bytes || 0, n: nm.slice(0, 60) });
+        added++;
+      } else if (result.event === 'queues-end' && added) {
+        added = 0;
+        try { await flPublish(); toast('Files published'); }
+        catch (e) { toast('Couldn\u2019t publish the file list'); }
+      }
+    }).open();
+  }
+
   function openLogoWidget() {
     if (isDemo() || !presetSet()) { toast('Add your Cloudinary cloud name and upload preset first'); return; }
     if (!window.cloudinary) { toast('Uploader is still loading — try again in a moment'); return; }
     cloudinary.createUploadWidget({
-      cloudName: CONFIG.CLOUD_NAME, uploadPreset: CONFIG.UPLOAD_PRESET, tags: [LOGO_TAG],
+      cloudName: CONFIG.CLOUD_NAME, uploadPreset: CONFIG.UPLOAD_PRESET, tags: [LOGO_TAG], publicId: 'ov-logo',
       sources: ['local', 'url'], multiple: false, resourceType: 'image', cropping: false,
-      clientAllowedFormats: ['png', 'jpg', 'jpeg', 'webp', 'svg'], maxFileSize: 10000000
+      clientAllowedFormats: ['png', 'jpg', 'jpeg', 'webp', 'svg'], maxFileSize: 10000000, styles: WIDGET_STYLES
     }, (error, result) => {
       if (error) { toast('Logo upload problem — run the Setup check'); return; }
-      if (result && result.event === 'success') { applyLogo(result.info.secure_url); toast('Logo updated'); }
+      if (result && result.event === 'success') {
+        if (result.info.existing) toast('A logo already exists. Delete \u201Cov-logo\u201D in Cloudinary to replace it.');
+        else { applyLogo(result.info.secure_url); toast('Logo updated'); }
+      }
     }).open();
   }
 
@@ -1530,20 +1866,18 @@
     btn.disabled = false;
   }
 
-  /* ---- Arrange, preview & publish ---- */
-  const SORTABLE_URL = 'https://cdn.jsdelivr.net/npm/sortablejs@1.15.2/Sortable.min.js';
-  const S = { tag: '', items: [], view: 'arr', sort: null, draft: false };
+  const S = { tag: '', items: [], view: 'arr', draft: false, cover: '', focus: null };
   const dk = t => 'ov_draft_' + t;
   const stTag = () => A.mode === 'client' ? A.id : SEC[A.mode].tag;
   const stLog = m => { $('#st-log').textContent = m || ''; };
 
-  function stClear() { S.tag = ''; S.items = []; S.view = 'arr'; S.draft = false; stLog(''); paintStage(); }
-  function stDraft() { store.set(dk(S.tag), ser(S.items.map(entry)), true); S.draft = true; }
+  function stClear() { S.tag = ''; S.items = []; S.view = 'arr'; S.draft = false; S.cover = ''; stLog(''); paintStage(); }
+  function stDraft() { store.set(dk(S.tag), ser(S.items), true); S.draft = true; }
   function stChange() { stDraft(); paintStage(); }
 
   async function stLoad(quiet, fresh) {
     const tag = stTag();
-    if (A.mode === 'client' && !/^[a-z0-9][a-z0-9_-]{2,63}$/.test(tag)) { if (!quiet) toast('Enter a gallery ID first'); return; }
+    if (A.mode === 'client' && !validId(tag)) { if (!quiet) toast('Enter a gallery ID first'); return; }
     $('#st-status').textContent = 'Loading photos\u2026';
     try {
       const tags = A.mode === 'client' ? [tag] : [tag, ...(SEC[A.mode].legacy || [])];
@@ -1554,7 +1888,19 @@
         if (d.length) { lay = d; draft = true; }
       }
       if (!lay) lay = await loadLayout(tag);
-      S.tag = tag; S.draft = draft;
+      S.tag = tag; S.draft = draft; S.cover = '';
+      if (A.mode === 'client') {
+        const m = await loadMeta(tag);
+        if (m) {
+          S.cover = m.c || '';
+          if (!A.title && m.t) { A.title = m.t; $('#f-title').value = m.t; }
+          if (!A.date && m.d) { A.date = m.d; $('#f-date').value = m.d; }
+          if (!A.pin && !A.ph && m.p) A.ph = m.p;
+          A.metaSent = JSON.stringify({ t: m.t || '', d: m.d || '', p: m.p || '', c: m.c || '' });
+          paintAdmin();
+        }
+        flLoad(true);
+      }
       S.items = applyLayout(items, lay, true);
       stLog('');
       paintStage();
@@ -1567,34 +1913,20 @@
 
   function stRow(it, i) {
     const row = document.createElement('div');
-    row.className = 'rounded-2xl border border-white/10 bg-black/20 p-2';
+    row.className = 'rounded-2xl border border-white/10 bg-black/20 p-2' + (it.hide ? ' opacity-50' : '');
     row.dataset.i = i;
-    const rot = d => `style="display:inline-flex;transform:rotate(${d}deg)"`;
-    const sp = spans(it), fx = it.fx == null ? 50 : it.fx, fy = it.fy == null ? 50 : it.fy;
-    const stepper = (label, key, val) =>
-      `<div class="flex items-center justify-between gap-2"><span>${label}</span><div class="flex items-center gap-2">` +
-      `<button type="button" data-act="${key}-" class="glass tap rounded-xl text-base" aria-label="Fewer ${label.toLowerCase()}">\u2212</button>` +
-      `<span class="w-5 text-center text-white">${val}</span>` +
-      `<button type="button" data-act="${key}+" class="glass tap rounded-xl text-base" aria-label="More ${label.toLowerCase()}">+</button></div></div>`;
+    const asp = (it.cw * it.w) / (it.ch * it.h);
+    const tw = Math.round(clamp(56 * asp, 44, 120));
+    const isCover = S.cover ? S.cover === it.id : i === S.items.findIndex(x => !x.hide);
     row.innerHTML =
-      `<div class="flex items-center gap-2${it.hide ? ' opacity-40' : ''}">` +
-      `<span class="drag-h glass tap rounded-xl" title="Drag to reorder" aria-label="Drag to reorder">${svg('grip', 'h-5 w-5')}</span>` +
-      `<button type="button" data-act="up" class="glass tap rounded-xl" aria-label="Move earlier"><span ${rot(90)}>${svg('chevL', 'h-4 w-4')}</span></button>` +
-      `<button type="button" data-act="down" class="glass tap rounded-xl" aria-label="Move later"><span ${rot(90)}>${svg('chevR', 'h-4 w-4')}</span></button>` +
-      `<img src="${it.thumb}" alt="" draggable="false" class="h-14 w-14 shrink-0 rounded-xl object-cover" style="object-position:${fx}% ${fy}%">` +
-      `<p class="min-w-0 flex-1 truncate text-xs text-mute">${i + 1}${it.hide ? ' hidden' : ''}</p>` +
-      `<button type="button" data-act="del" class="glass tap rounded-xl" aria-label="${it.hide ? 'Restore' : 'Remove'} photo ${i + 1}">${it.hide ? '<span class="text-xs">Undo</span>' : svg('close', 'h-4 w-4')}</button></div>` +
-      `<div class="mt-2 grid grid-cols-4 gap-1">` +
-      Object.keys(TPL).map(k => `<button type="button" data-act="t" data-v="${k}" class="glass tap rounded-lg text-xs${it.t === k ? ' seg-on' : ''}" aria-pressed="${it.t === k}">${TPL[k]}</button>`).join('') + '</div>' +
-      `<button type="button" data-act="more" class="glass tap mt-2 w-full rounded-lg text-xs" aria-expanded="${!!it.open}">Size &amp; crop: ${it.t === 'c' ? 'custom ' : ''}${sp.cs}\u00d7${sp.rs}</button>` +
-      (it.open
-        ? `<div class="mt-2 space-y-3 rounded-xl bg-white/5 p-3 text-xs text-mute">` +
-          stepper('Columns wide', 'cs', sp.cs) + stepper('Rows tall', 'rs', sp.rs) +
-          `<label class="block">Crop focus, left to right<input type="range" min="0" max="100" value="${fx}" data-f="fx" class="mt-1 w-full"></label>` +
-          `<label class="block">Crop focus, top to bottom<input type="range" min="0" max="100" value="${fy}" data-f="fy" class="mt-1 w-full"></label>` +
-          `<button type="button" data-act="reset" class="glass tap w-full rounded-lg text-xs">Reset to 1\u00d71, centred</button>` +
-          `<p>Sizes are grid units (1 to 4). Phones show at most 2 columns, so wider tiles fill the screen width there.</p></div>`
-        : '');
+      `<div class="flex items-center gap-2">` +
+      `<input class="posbox" type="text" inputmode="numeric" pattern="[0-9]*" value="${i + 1}" aria-label="Position of photo ${i + 1}">` +
+      `<div class="relative h-14 shrink-0 overflow-hidden rounded-xl bg-white/5" style="width:${tw}px"><img src="${thumbAt(it, 400)}" alt="" draggable="false" style="${cropCss(it)}"></div>` +
+      `<p class="min-w-0 flex-1 truncate text-xs text-mute">${it.hide ? 'Hidden \u00b7 ' : ''}${it.cs >= 6 ? 'Full' : it.cs + ' col'} \u00b7 ${asp.toFixed(2)}:1</p>` +
+      `<button type="button" data-act="cover" class="glass tap rounded-xl${isCover ? ' seg-on' : ''}" aria-label="Use as gallery cover" aria-pressed="${isCover}">${svg('star', 'h-[18px] w-[18px]')}</button>` +
+      `<button type="button" data-act="del" class="glass tap rounded-xl" aria-label="${it.hide ? 'Restore' : 'Remove'} photo ${i + 1}">${it.hide ? '<span class="text-xs">Undo</span>' : svg('close', 'h-4 w-4')}</button>` +
+      `</div>` +
+      `<button type="button" data-act="crop" class="glass tap mt-2 w-full rounded-xl text-sm">Crop &amp; size</button>`;
     return row;
   }
 
@@ -1607,7 +1939,6 @@
     show($('#st-actions'), has);
     show($('#st-list'), has && S.view === 'arr');
     show($('#st-prev'), has && S.view === 'pre');
-    $('#st-list').classList.toggle('has-sort', !!S.sort);
     $$('[data-sv]').forEach(b => b.classList.toggle('seg-on', b.dataset.sv === S.view));
     if (!has) return;
     if (S.view === 'pre') {
@@ -1615,14 +1946,14 @@
       g.classList.toggle('lts', A.mode !== 'client');
       renderGrid(g, shown, { withDownload: false, label: 'Preview' });
     } else {
-      $('#st-list').replaceChildren(...S.items.map(stRow));
+      const list = $('#st-list');
+      list.replaceChildren(...S.items.map(stRow));
+      if (S.focus != null) {
+        const r = list.children[S.focus];
+        S.focus = null;
+        if (r) { r.scrollIntoView({ block: 'center', behavior: 'smooth' }); r.classList.add('flash'); }
+      }
     }
-  }
-
-  function stMove(from, to) {
-    if (to < 0 || to >= S.items.length || from === to) return;
-    S.items.splice(to, 0, S.items.splice(from, 1)[0]);
-    stChange();
   }
 
   async function stPublish() {
@@ -1631,9 +1962,10 @@
     const btn = $('#st-publish');
     btn.disabled = true;
     stLog('Publishing\u2026');
-    const want = ser(S.items.map(entry));
+    const want = ser(S.items);
     try {
-      await publishLayout(S.tag, S.items);
+      await writeBatch(LTAG(S.tag), 'ovl', ser(S.items));
+      if (A.mode === 'client') await publishMeta();
       store.del(dk(S.tag), true);
       S.draft = false;
       if (A.mode === 'client') saveRecent();
@@ -1642,7 +1974,7 @@
       for (let i = 0; i < 4 && !ok; i++) {
         await sleep(i ? 2000 : 800);
         const lay = await loadLayout(S.tag);
-        ok = !!lay && ser(lay.map(e => ({ id: e.id, t: e.t, cs: e.t === 'c' ? e.cs : 0, rs: e.t === 'c' ? e.rs : 0, fx: e.fx, fy: e.fy }))) === want;
+        ok = !!lay && ser(lay.filter(e => !e.old)) === want;
       }
       stLog(ok ? 'Live. Visitors now get this exact order and sizing.' : 'Uploaded. Cloudinary is still refreshing its list, so give it a minute and reload the site.');
       toast(ok ? 'Published live' : 'Published. It may take a minute to appear');
@@ -1655,13 +1987,163 @@
     btn.disabled = false;
   }
 
-  function initSortable() {
-    if (S.sort || !window.Sortable) return;
-    S.sort = Sortable.create($('#st-list'), {
-      handle: '.drag-h', animation: 160, delay: 80, delayOnTouchOnly: true, touchStartThreshold: 4,
-      onEnd: e => { if (e.oldIndex !== e.newIndex) stMove(e.oldIndex, e.newIndex); }
+  const C = { it: null, r: { x: 0, y: 0, w: 1, h: 1 }, cs: 1, a: null, lock: false, key: 'free', W: 0, H: 0 };
+  const RATIOS = [['free', 'Free', null], ['orig', 'Original', -1], ['1:1', '1:1', 1], ['4:5', '4:5', .8], ['3:2', '3:2', 1.5], ['16:9', '16:9', 16 / 9], ['2:1', '2:1', 2], ['1:2', '1:2', .5]];
+  const WIDTHS = [[1, '1'], [2, '2'], [3, '3'], [4, '4'], [6, 'Full']];
+
+  function resizeRect(hd, s, dx, dy, W, H, a) {
+    const MIN = 40;
+    let l = s.x, t = s.y, r = s.x + s.w, b = s.y + s.h;
+    if (hd.includes('w')) l = Math.min(Math.max(0, l + dx), r - MIN);
+    if (hd.includes('e')) r = Math.max(Math.min(W, r + dx), l + MIN);
+    if (hd.includes('n')) t = Math.min(Math.max(0, t + dy), b - MIN);
+    if (hd.includes('s')) b = Math.max(Math.min(H, b + dy), t + MIN);
+    let w = r - l, h = b - t, x = l, y = t;
+    if (a) {
+      const corner = hd.length === 2, horiz = hd === 'e' || hd === 'w';
+      const cx = s.x + s.w / 2, cy = s.y + s.h / 2;
+      if (corner) { if (w / h > a) w = h * a; else h = w / a; }
+      else if (horiz) { h = w / a; const mh = 2 * Math.min(cy, H - cy); if (h > mh) { h = mh; w = h * a; } }
+      else { w = h * a; const mw = 2 * Math.min(cx, W - cx); if (w > mw) { w = mw; h = w / a; } }
+      if (corner) { x = hd.includes('w') ? r - w : l; y = hd.includes('n') ? b - h : t; }
+      else if (horiz) { x = hd === 'w' ? r - w : l; y = cy - h / 2; }
+      else { y = hd === 'n' ? b - h : t; x = cx - w / 2; }
+    }
+    return { x, y, w, h };
+  }
+
+  function setPx(x, y, w, h) {
+    const { W, H } = C;
+    w = clamp(w, 1, W); h = clamp(h, 1, H);
+    x = clamp(x, 0, W - w); y = clamp(y, 0, H - h);
+    C.r = { x: x / W, y: y / H, w: w / W, h: h / H };
+  }
+
+  function fitRatio(a) {
+    const { W, H, r } = C;
+    const cx = (r.x + r.w / 2) * W, cy = (r.y + r.h / 2) * H;
+    const w = Math.min(W, H * a), h = w / a;
+    setPx(cx - w / 2, cy - h / 2, w, h);
+  }
+
+  function fitCrop() {
+    const st = $('#cr-stage');
+    const sw = st.clientWidth - 48, sh = st.clientHeight - 48, ar = C.it.w / C.it.h;
+    const w = Math.max(60, Math.min(sw, sh * ar)), h = w / ar;
+    const wrap = $('#cr-wrap');
+    wrap.style.width = w + 'px';
+    wrap.style.height = h + 'px';
+    C.W = w; C.H = h;
+  }
+
+  function paintCrop() {
+    const { W, H, r } = C;
+    const x = r.x * W, y = r.y * H, w = r.w * W, h = r.h * H;
+    $('#cr-box').style.cssText = `left:${x}px;top:${y}px;width:${w}px;height:${h}px`;
+    const cp = `polygon(evenodd,0 0,100% 0,100% 100%,0 100%,0 0,${x}px ${y}px,${x}px ${y + h}px,${x + w}px ${y + h}px,${x + w}px ${y}px,${x}px ${y}px)`;
+    const sh = $('#cr-shade');
+    sh.style.clipPath = cp; sh.style.webkitClipPath = cp;
+    $$('#cr-ratios [data-k]').forEach(b => b.classList.toggle('seg-on', b.dataset.k === C.key));
+    $$('#cr-width [data-cs]').forEach(b => b.classList.toggle('seg-on', +b.dataset.cs === C.cs));
+    $('#cr-lock').innerHTML = svg(C.lock ? 'lock' : 'unlock', 'h-[18px] w-[18px]') + `<span>${C.lock ? 'Locked' : 'Unlocked'}</span>`;
+    $('#cr-info').textContent = `${Math.round(r.w * C.it.w)} \u00d7 ${Math.round(r.h * C.it.h)} px \u00b7 ${((r.w * C.it.w) / (r.h * C.it.h)).toFixed(2)}:1`;
+  }
+
+  function openCrop(i) {
+    const it = S.items[i];
+    if (!it) return;
+    Object.assign(C, { i, it, r: { x: it.cx, y: it.cy, w: it.cw, h: it.ch }, cs: it.cs, a: null, lock: false, key: 'free' });
+    $('#cr-img').src = thumbAt(it, 1200);
+    show($('#crop-modal'), true);
+    syncLock();
+    requestAnimationFrame(() => { fitCrop(); paintCrop(); });
+  }
+  function closeCrop() { show($('#crop-modal'), false); syncLock(); }
+
+  function bindCrop() {
+    $('#cr-ratios').replaceChildren(...RATIOS.map(([k, label]) => {
+      const b = document.createElement('button');
+      b.type = 'button'; b.dataset.k = k; b.textContent = label;
+      b.className = 'glass tap shrink-0 rounded-full px-4 text-sm';
+      return b;
+    }));
+    $('#cr-width').replaceChildren(...WIDTHS.map(([cs, label]) => {
+      const b = document.createElement('button');
+      b.type = 'button'; b.dataset.cs = cs; b.textContent = label;
+      b.className = 'glass tap flex-1 rounded-xl text-sm';
+      return b;
+    }));
+
+    const box = $('#cr-box');
+    let drag = null;
+    box.addEventListener('pointerdown', e => {
+      e.preventDefault();
+      box.setPointerCapture(e.pointerId);
+      const r = C.r;
+      drag = { hd: (e.target.dataset && e.target.dataset.h) || '', sx: e.clientX, sy: e.clientY, s: { x: r.x * C.W, y: r.y * C.H, w: r.w * C.W, h: r.h * C.H } };
     });
-    paintStage();
+    box.addEventListener('pointermove', e => {
+      if (!drag) return;
+      const dx = e.clientX - drag.sx, dy = e.clientY - drag.sy, s = drag.s, { W, H } = C;
+      if (!drag.hd) setPx(clamp(s.x + dx, 0, W - s.w), clamp(s.y + dy, 0, H - s.h), s.w, s.h);
+      else {
+        const n = resizeRect(drag.hd, s, dx, dy, W, H, C.lock ? C.a : null);
+        setPx(n.x, n.y, n.w, n.h);
+        if (!C.lock) C.key = 'free';
+      }
+      paintCrop();
+    });
+    const end = () => { drag = null; };
+    box.addEventListener('pointerup', end);
+    box.addEventListener('pointercancel', end);
+
+    $('#cr-ratios').addEventListener('click', e => {
+      const b = e.target.closest('[data-k]');
+      if (!b) return;
+      const k = b.dataset.k, def = RATIOS.find(x => x[0] === k);
+      if (k === 'free') { C.a = null; C.lock = false; C.key = 'free'; }
+      else { const a = def[2] === -1 ? C.it.w / C.it.h : def[2]; C.a = a; C.lock = true; C.key = k; fitRatio(a); }
+      paintCrop();
+    });
+    $('#cr-width').addEventListener('click', e => {
+      const b = e.target.closest('[data-cs]');
+      if (!b) return;
+      C.cs = +b.dataset.cs;
+      paintCrop();
+    });
+    $('#cr-lock').addEventListener('click', () => {
+      if (C.lock) { C.lock = false; C.key = 'free'; }
+      else { C.a = (C.r.w * C.W) / (C.r.h * C.H); C.lock = true; C.key = 'cur'; }
+      paintCrop();
+    });
+    $('#cr-swap').addEventListener('click', () => {
+      const a = C.a || (C.r.w * C.W) / (C.r.h * C.H);
+      C.a = 1 / a; C.lock = true; C.key = 'cur';
+      fitRatio(C.a);
+      paintCrop();
+    });
+    $('#cr-set').addEventListener('click', () => {
+      const w = parseFloat($('#cr-cw').value), h = parseFloat($('#cr-ch').value);
+      if (!(w > 0) || !(h > 0)) { toast('Enter a width and a height, e.g. 4 and 5'); return; }
+      C.a = w / h; C.lock = true; C.key = 'cur';
+      fitRatio(C.a);
+      paintCrop();
+    });
+    $('#cr-reset').addEventListener('click', () => {
+      C.r = { x: 0, y: 0, w: 1, h: 1 }; C.a = null; C.lock = false; C.key = 'free';
+      paintCrop();
+    });
+    $('#cr-cancel').addEventListener('click', closeCrop);
+    $('#cr-done').addEventListener('click', () => {
+      Object.assign(C.it, { cx: C.r.x, cy: C.r.y, cw: C.r.w, ch: C.r.h, cs: C.cs });
+      fixCrop(C.it);
+      closeCrop();
+      S.focus = C.i;
+      stChange();
+    });
+    window.addEventListener('resize', () => {
+      if (!$('#crop-modal').classList.contains('is-hidden')) { fitCrop(); paintCrop(); }
+    });
   }
 
   function bindStage() {
@@ -1669,10 +2151,9 @@
     $('#st-publish').addEventListener('click', stPublish);
     $('#st-revert').addEventListener('click', () => { store.del(dk(stTag()), true); stLoad(false, true); });
     $('#st-auto').addEventListener('click', () => {
-      const shown = S.items.filter(i => !i.hide), auto = autoTpl(shown);
-      shown.forEach((it, i) => { it.t = auto[i]; });
+      autoDefaults(S.items);
       stChange();
-      toast('Templates reset');
+      toast('Layout reset');
     });
     $$('[data-sv]').forEach(b => b.addEventListener('click', () => { S.view = b.dataset.sv; paintStage(); }));
 
@@ -1681,44 +2162,63 @@
       const b = e.target.closest('button[data-act]'), row = e.target.closest('[data-i]');
       if (!b || !row) return;
       const i = +row.dataset.i, it = S.items[i], act = b.dataset.act;
-      if (act === 'up') return stMove(i, i - 1);
-      if (act === 'down') return stMove(i, i + 1);
-      if (act === 'more') { it.open = !it.open; return paintStage(); }
-      if (act === 'del') it.hide = !it.hide;
-      else if (act === 't') it.t = b.dataset.v;
-      else if (act === 'reset') { it.t = 's'; it.fx = 50; it.fy = 50; }
-      else {
-        const m = /^(cs|rs)([+-])$/.exec(act);
-        if (!m) return;
-        const sp = spans(it);
-        it.cs = sp.cs; it.rs = sp.rs; it.t = 'c';
-        it[m[1]] = clampN(it[m[1]] + (m[2] === '+' ? 1 : -1), 1, 4);
-      }
+      if (act === 'crop') return openCrop(i);
+      if (act === 'cover') { S.cover = it.id; S.draft = true; return paintStage(); }
+      if (act === 'del') { it.hide = !it.hide; stChange(); }
+    });
+    list.addEventListener('focusin', e => { if (e.target.classList.contains('posbox')) e.target.select(); });
+    list.addEventListener('keydown', e => { if (e.key === 'Enter' && e.target.classList.contains('posbox')) e.target.blur(); });
+    list.addEventListener('change', e => {
+      const p = e.target.closest('input.posbox');
+      if (!p) return;
+      const from = +p.closest('[data-i]').dataset.i;
+      let to = parseInt(p.value, 10);
+      if (isNaN(to)) { p.value = from + 1; return; }
+      to = clamp(to, 1, S.items.length) - 1;
+      if (to === from) { p.value = from + 1; return; }
+      S.items.splice(to, 0, S.items.splice(from, 1)[0]);
+      S.focus = to;
       stChange();
     });
-    list.addEventListener('input', e => {
-      const r = e.target.closest('input[data-f]'), row = e.target.closest('[data-i]');
-      if (!r || !row) return;
-      const it = S.items[+row.dataset.i];
-      it[r.dataset.f] = +r.value;
-      row.querySelector('img').style.objectPosition = `${it.fx == null ? 50 : it.fx}% ${it.fy == null ? 50 : it.fy}%`;
-    });
-    list.addEventListener('change', e => { if (e.target.closest('input[data-f]')) stDraft(); });
-
-    loadScript(SORTABLE_URL).then(initSortable).catch(() => { /* nudge buttons still work */ });
+    bindCrop();
   }
 
   function resetGallery() {
-    Object.assign(A, { title: '', date: '', pin: '', rand: rand(5), id: '', idManual: false, uploaded: 0, locked: false });
+    Object.assign(A, { title: '', date: '', pin: '', ph: '', rand: rand(5), id: '', idManual: false, uploaded: 0, locked: false, metaSent: '' });
     $('#f-title').value = ''; $('#f-date').value = ''; $('#f-pin').value = '';
-    syncId(); paintAdmin();
+    F.tag = ''; F.items = []; paintFileList();
+    syncId(); paintAdmin(); stClear();
+  }
+
+  function coverItem() {
+    if (S.tag !== A.id || !S.items.length) return null;
+    return S.items.find(x => x.id === S.cover) || S.items.find(x => !x.hide) || null;
+  }
+
+  async function shareWithPreview() {
+    try { await publishMeta(); } catch (e) {}
+    const url = buildLink(), title = A.title.trim() || CONFIG.BRAND;
+    try {
+      const cov = coverItem();
+      if (cov && navigator.canShare) {
+        const blob = await fetchBlob(cov.r ? cld(cov.r, 'c_limit,w_1200,q_80,f_jpg') : cov.thumb);
+        const f = new File([blob], 'preview.jpg', { type: 'image/jpeg' });
+        if (navigator.canShare({ files: [f] })) { await navigator.share({ files: [f], title, text: `${title}\n${url}` }); saveRecent(); return; }
+      }
+      if (!cov) toast('Tap Load photos first to include the preview image');
+      await navigator.share({ title, text: title, url });
+      saveRecent();
+    } catch (e) { if (e && e.name !== 'AbortError') toast('Couldn\u2019t share. Use Copy link instead.'); }
   }
 
   function bindAdmin() {
     if (adminBound) return;
     adminBound = true;
 
-    $$('[data-mode]').forEach(b => b.addEventListener('click', () => { A.mode = b.dataset.mode; syncId(); paintAdmin(); stClear(); }));
+    $$('[data-mode]').forEach(b => b.addEventListener('click', () => {
+      A.mode = b.dataset.mode; syncId(); paintAdmin(); stClear();
+      F.tag = ''; F.items = []; paintFileList();
+    }));
 
     $('#f-title').addEventListener('input', e => { A.title = e.target.value; syncId(); paintAdmin(); });
     $('#f-date').addEventListener('input', e => { A.date = e.target.value; paintAdmin(); });
@@ -1726,30 +2226,48 @@
       e.target.value = e.target.value.replace(/\D/g, '');
       A.pin = e.target.value; paintAdmin();
     });
+    $('#nopin').addEventListener('click', () => { A.ph = ''; A.pin = ''; $('#f-pin').value = ''; paintAdmin(); toast('PIN removed. Tap Save details to apply.'); });
     $('#f-id').addEventListener('input', e => {
       const v = e.target.value.toLowerCase().replace(/[^a-z0-9_-]/g, '');
       e.target.value = v; A.id = v; A.idManual = true; paintAdmin();
     });
     $('#btn-newid').addEventListener('click', () => { A.rand = rand(5); A.idManual = false; syncId(); paintAdmin(); });
     $('#btn-reset').addEventListener('click', () => { resetGallery(); toast('Ready for a new gallery'); });
+    $('#btn-save-meta').addEventListener('click', async () => {
+      if (isDemo() || !presetSet()) { toast('Add your Cloudinary cloud name and upload preset first'); return; }
+      if (!validId(A.id)) { toast('Gallery ID needs 3+ characters: a–z, 0–9, dashes'); return; }
+      try { await publishMeta(); saveRecent(); toast('Details saved'); }
+      catch (e) { toast('Couldn\u2019t save details: ' + e.message); }
+    });
 
     $('#btn-upload').addEventListener('click', openUploadWidget);
+    $('#btn-files').addEventListener('click', openFilesWidget);
+    $('#fl-refresh').addEventListener('click', async () => { await flLoad(false); toast('Files refreshed'); });
+    $('#fl-list').addEventListener('click', async e => {
+      const b = e.target.closest('button[data-i]');
+      if (!b) return;
+      if (!confirm('Remove this file from the gallery?')) return;
+      F.items.splice(+b.dataset.i, 1);
+      try { await flPublish(); toast('File removed'); }
+      catch (err) { toast('Couldn\u2019t update the file list'); }
+    });
 
-    $('#btn-copy').addEventListener('click', async () => {
+    const withMeta = fn => async () => { try { await publishMeta(); } catch (e) {} fn(); };
+    $('#btn-copy').addEventListener('click', withMeta(async () => {
       const ok = await copyText($('#link-out').value);
       toast(ok ? 'Link copied' : 'Couldn\u2019t copy — select the link manually');
       if (ok) saveRecent();
+    }));
+    $('#btn-copy-id').addEventListener('click', async () => {
+      try { await publishMeta(); } catch (e) {}
+      toast(await copyText($('#id-out').value) ? 'Client ID copied' : 'Couldn\u2019t copy — select the ID manually');
+      saveRecent();
     });
-    $('#btn-open').addEventListener('click', () => saveRecent());
+    $('#btn-open').addEventListener('click', () => { publishMeta().catch(() => {}); saveRecent(); });
     const shareBtn = $('#btn-share');
-    if (navigator.share) {
-      show(shareBtn, true);
-      shareBtn.addEventListener('click', async () => {
-        try { await navigator.share({ title: A.title.trim() || CONFIG.BRAND, url: $('#link-out').value }); saveRecent(); }
-        catch (e) { /* user cancelled */ }
-      });
-    }
+    if (navigator.share) { show(shareBtn, true); shareBtn.addEventListener('click', shareWithPreview); }
     $('#link-out').addEventListener('focus', e => e.target.select());
+    $('#id-out').addEventListener('focus', e => e.target.select());
 
     $('#btn-clear-recent').addEventListener('click', () => { store.del(RECENT_KEY, true); paintRecent(); });
     $('#btn-check').addEventListener('click', checkSetup);
@@ -1797,9 +2315,6 @@
     });
   }
 
-  /* ==========================================================
-     Router
-     ========================================================== */
   function route() {
     const q = new URLSearchParams(location.search);
     if (q.get('mode') === 'admin') return initAdmin();
