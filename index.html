@@ -118,9 +118,14 @@
   .clip img { transform:scale(1.22); transition:transform 2.2s var(--ease); transition-delay:var(--d, 0s); }
   .clip.in img { transform:none; }
 
-  #curtain { position:fixed; inset:0; z-index:100; display:flex; align-items:center; justify-content:center; background:var(--bg); color:var(--fg); font-size:clamp(2rem, 8vw, 3.5rem); transition:transform 1.1s var(--ease) .1s; }
+  #curtain { position:fixed; inset:0; z-index:100; display:flex; align-items:center; justify-content:center; background:var(--bg); color:var(--fg); font-size:clamp(2rem, 8vw, 3.5rem); flex-direction:column; transition:opacity 1.2s ease; }
   #curtain span { animation:fadeUp 1s var(--ease) both; }
-  #curtain.out { transform:translateY(-100%); }
+  #curtain { transition:transform 1s cubic-bezier(.76,0,.24,1); will-change:transform; }
+  #curtain.out { transform:translateY(-100%); pointer-events:none; }
+  html.intro { background:var(--bg); }
+  html.intro body > *:not(#curtain) { opacity:0 !important; transition:opacity .5s ease; }
+  html.zoom body > *:not(#curtain) { animation:zoomIn 1.1s var(--ease) backwards; }
+  @keyframes zoomIn { from { opacity:0; transform:scale(.88); } to { opacity:1; transform:none; } }
   body.leaving #view-portfolio { opacity:0; transition:opacity .45s ease; }
 
   #lightbox:not(.is-hidden), #zip-modal:not(.is-hidden), #pin-overlay:not(.is-hidden), #crop-modal:not(.is-hidden) { animation:fadeIn .4s var(--ease); }
@@ -157,9 +162,11 @@
   .wl-bg { position:absolute; inset:0; overflow:hidden; }
   .wl-bg img { width:100%; height:100%; object-fit:cover; opacity:0; transform:scale(1.18); transition:opacity 1.6s var(--ease), transform 3s var(--ease); }
   .wl-bg img.loaded { opacity:1; transform:scale(1); }
-  .wl-shade { position:absolute; inset:0; background:linear-gradient(to top, rgba(0,0,0,.82), rgba(0,0,0,.12) 55%, rgba(0,0,0,.4)); }
-  .wl-content { position:absolute; left:0; right:0; bottom:0; padding:0 24px calc(48px + env(safe-area-inset-bottom, 0px)); max-width:900px; }
-  .wl-content > * { opacity:0; animation:fadeUp 1.2s var(--ease) forwards; }
+  .wl-shade { position:absolute; inset:0; background:rgba(0,0,0,.45); }
+  #g-welcome { height:100vh; height:100dvh; }
+  .wl-content { position:absolute; inset:0; display:flex; flex-direction:column; align-items:center; justify-content:center; text-align:center; padding:0 24px; }
+  .wl-content > * { opacity:0; animation:wlUp 1.2s var(--ease) forwards; }
+  @keyframes wlUp { from { opacity:0; transform:translateY(24px); } to { opacity:1; transform:none; } }
   .wl-content > :nth-child(1) { animation-delay:.5s; } .wl-content > :nth-child(2) { animation-delay:.7s; } .wl-content > :nth-child(3) { animation-delay:.9s; } .wl-content > :nth-child(4) { animation-delay:1.1s; }
 
   .cr-box { position:absolute; border:1.5px solid #fff; cursor:move; touch-action:none; background:linear-gradient(rgba(255,255,255,.4),rgba(255,255,255,.4)) 33.33% 0/1px 100% no-repeat, linear-gradient(rgba(255,255,255,.4),rgba(255,255,255,.4)) 66.66% 0/1px 100% no-repeat, linear-gradient(rgba(255,255,255,.4),rgba(255,255,255,.4)) 0 33.33%/100% 1px no-repeat, linear-gradient(rgba(255,255,255,.4),rgba(255,255,255,.4)) 0 66.66%/100% 1px no-repeat; }
@@ -190,7 +197,7 @@
 <div id="toast" role="status" aria-live="polite"
      class="glass glass-strong toast-pos is-hidden pointer-events-none fixed left-1/2 z-[120] max-w-[90vw] -translate-x-1/2 rounded-full px-5 py-3 text-center text-sm"></div>
 
-<div id="curtain" class="is-hidden"><span class="font-display">Ompha <em>Visuals</em></span></div>
+<div id="curtain" class="is-hidden"><span class="font-display">Ompha <em>Visuals</em></span><p class="eyebrow" style="margin-top:14px;animation:fadeUp 1s var(--ease) .3s both">Portrait &middot; Sports &middot; Photographer</p></div>
 
 <section id="view-portfolio" class="is-hidden">
   <header id="p-head" class="p-head safe-top">
@@ -226,7 +233,6 @@
     </div>
   </section>
 
-  <div class="overflow-hidden py-6" style="border-block:1px solid var(--line)"><div id="marq" class="marq font-display text-3xl sm:text-5xl"></div></div>
 
   <section id="work" class="wrap pb-24 pt-24">
     <div class="rv mb-10 flex flex-wrap items-end justify-between gap-4">
@@ -1399,8 +1405,6 @@
     show($('#view-portfolio'), true);
     show($('#demo-note'), isDemo());
     $('#yr').textContent = new Date().getFullYear();
-    const half = '<span>Portraits</span><span>\u2731</span><span>Sports</span><span>\u2731</span>'.repeat(6);
-    $('#marq').innerHTML = `<div class="flex shrink-0 gap-8 pr-8">${half}</div>`.repeat(2);
     paintContact();
     paintChips();
     loadLogo();
@@ -1409,8 +1413,43 @@
 
     const curtain = $('#curtain');
     show(curtain, true);
-    setTimeout(() => curtain.classList.add('out'), 900);
-    setTimeout(() => show(curtain, false), 2100);
+    document.documentElement.classList.add('lock', 'intro');
+    window.scrollTo(0, 0);
+    const root = document.documentElement;
+    let shown = true, busy = false, ty = null, atTop = true;
+    const goDown = () => {
+      if (!shown || busy) return;
+      busy = true; shown = false;
+      curtain.classList.add('out');
+      setTimeout(() => {
+        root.classList.remove('intro', 'lock');
+        const kids = [...document.body.children].filter(el => el !== curtain && el.tagName !== 'SCRIPT');
+        const anims = kids.map(el => el.animate(
+          [{ opacity: 0, transform: 'scale(.88)' }, { opacity: 1, transform: 'scale(1)' }],
+          { duration: 1100, easing: 'cubic-bezier(.22,1,.36,1)' }));
+        Promise.all(anims.map(an => an.finished.catch(() => {}))).then(() => { busy = false; });
+      }, 950);
+    };
+    const goUp = () => {
+      if (shown || busy || window.scrollY > 0) return;
+      busy = true; shown = true;
+      root.classList.add('intro', 'lock');
+      window.scrollTo(0, 0);
+      curtain.classList.remove('out');
+      setTimeout(() => { busy = false; }, 1000);
+    };
+    const onNav = e => {
+      if (e.type === 'wheel') { if (e.deltaY > 0) goDown(); else if (e.deltaY < 0) goUp(); }
+      else if (e.type === 'touchstart') { ty = e.touches[0].clientY; atTop = window.scrollY <= 0; }
+      else if (e.type === 'touchmove') {
+        if (ty === null) return;
+        const d = ty - e.touches[0].clientY;
+        if (d > 12) goDown(); else if (d < -12 && atTop) goUp();
+      }
+      else if (['ArrowDown', 'PageDown', ' ', 'End'].includes(e.key)) goDown();
+      else if (['ArrowUp', 'PageUp', 'Home'].includes(e.key)) goUp();
+    };
+    ['wheel', 'touchstart', 'touchmove', 'keydown'].forEach(ev => window.addEventListener(ev, onNav, { passive: true }));
 
     const head = $('#p-head');
     const onScroll = () => head.classList.toggle('scrolled', window.scrollY > 24);
